@@ -5,20 +5,31 @@
 //  Created by Gabriel Brodersen on 14/11/2020.
 //
 
-import SwiftUI
 
-struct TestingView: View {
-    var body: some View {
-        Menu("Actions") {
-            Button("Duplicate", action: print())
-            Button("Rename", action: print())
-            Button("Delete…", action: print())
-            Menu("Copy") {
-                Button("Copy", action: copy)
-                Button("Copy Formatted", action: copyFormatted)
-                Button("Copy Library Path", action: copyPath)
-            }
-        }
+
+
+//this was not commented out 1/2
+//
+//import SwiftUI
+//
+//struct TestingView: View {
+//    var body: some View {
+//        Menu("Actions") {
+//            Button("Duplicate", action: print())
+//            Button("Rename", action: print())
+//            Button("Delete…", action: print())
+//            Menu("Copy") {
+//                Button("Copy", action: copy)
+//                Button("Copy Formatted", action: copyFormatted)
+//                Button("Copy Library Path", action: copyPath)
+//            }
+//        }
+//
+        
+        
+        
+        
+        
 //        NavigationView {
 //            NavigationLink (destination:
 //                                TabView {
@@ -51,11 +62,19 @@ struct TestingView: View {
 //            .navigationBarTitle("Map")
 //        }
         
-    }
-}
 
-struct TestingView_Previews: PreviewProvider {
-    static var previews: some View {
-        TestingView()
-    }
-}
+
+
+
+
+
+//this was not commented out 2/2
+//
+//    }
+//}
+//
+//struct TestingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TestingView()
+//    }
+//}
