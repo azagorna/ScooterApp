@@ -4,6 +4,7 @@
         <attribute name="brand" optional="YES" attributeType="String"/>
         <attribute name="broken" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="comment" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="laying" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -19,7 +20,7 @@
         <attribute name="password" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Report" positionX="37.2265625" positionY="-193.234375" width="128" height="208"/>
+        <element name="Report" positionX="37.2265625" positionY="-193.234375" width="128" height="223"/>
         <element name="User" positionX="-250.18359375" positionY="27.765625" width="128" height="88"/>
     </elements>
 </model>
