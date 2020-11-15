@@ -23,6 +23,7 @@
 		C09A9FFC2560466E00CA3194 /* ReportStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF22560466D00CA3194 /* ReportStore.swift */; };
 		C09A9FFD2560466E00CA3194 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF32560466E00CA3194 /* MapView.swift */; };
 		C09A9FFE2560466E00CA3194 /* TestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF42560466E00CA3194 /* TestingView.swift */; };
+		C0F7A2702561403B0062BDD7 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F7A26F2561403B0062BDD7 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		C09A9FF22560466D00CA3194 /* ReportStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportStore.swift; sourceTree = "<group>"; };
 		C09A9FF32560466E00CA3194 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		C09A9FF42560466E00CA3194 /* TestingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingView.swift; sourceTree = "<group>"; };
+		C0F7A26F2561403B0062BDD7 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				C030E8482560443C006D46DE /* ContentView.swift */,
 				C030E84A2560443D006D46DE /* Assets.xcassets */,
 				C030E84F2560443D006D46DE /* Persistence.swift */,
+				C0F7A26F2561403B0062BDD7 /* ImagePicker.swift */,
 				C09A9FEC2560466B00CA3194 /* CameraScreenView.swift */,
 				C09A9FEB2560466B00CA3194 /* CustomCameraPhotoView.swift */,
 				C09A9FF02560466D00CA3194 /* LocationManager.swift */,
@@ -178,6 +181,7 @@
 				C030E8502560443D006D46DE /* Persistence.swift in Sources */,
 				C09A9FFD2560466E00CA3194 /* MapView.swift in Sources */,
 				C09A9FFB2560466E00CA3194 /* Report.swift in Sources */,
+				C0F7A2702561403B0062BDD7 /* ImagePicker.swift in Sources */,
 				C09A9FF82560466E00CA3194 /* MainView.swift in Sources */,
 				C09A9FF52560466E00CA3194 /* CustomCameraPhotoView.swift in Sources */,
 				C09A9FFE2560466E00CA3194 /* TestingView.swift in Sources */,

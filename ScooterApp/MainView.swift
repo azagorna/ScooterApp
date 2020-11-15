@@ -11,6 +11,7 @@ struct MainView: View {
     
     @State private var screen: String? = "map"
     @ObservedObject var locationManager = LocationManager()
+    @State private var showImagePicker = false
     
     var body: some View {
         NavigationView(content: {
@@ -38,7 +39,9 @@ struct MainView: View {
                     NavigationLink(destination: CameraScreenView(), tag: "camera", selection: $screen) {
                         EmptyView()
                     }
-                    Button(action: { self.screen = "camera" }) {
+                    Button(action: { self.screen = "camera"
+                        self.showImagePicker = true
+                    }) {
                         Image(systemName: "plus")
                             .padding()
                             .background(Color.accentColor)
