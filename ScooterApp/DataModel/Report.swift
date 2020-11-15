@@ -35,7 +35,6 @@ class Report: Identifiable, ObservableObject {
     @Published var misplaced = false
     @Published var other = false
     @Published var comment = ""
-    @Published var submittable = false // TODO, use checkIfSubmittable()
     
     init() {
         self.id = UUID()
@@ -78,20 +77,16 @@ class Report: Identifiable, ObservableObject {
         return self.brand.rawValue
     }
     
-
-    func checkIfSubmittable() {
-        if !self.user.isEmpty && self.photo != nil && self.timestamp != nil && self.longitude != nil && self.latitude != nil {
-          // One description must be selected
-          if (self.laying || self.broken || self.misplaced || self.other) {
-            self.submittable = true;
-          }
+    func checkIfSubmittable() -> Bool {
+        if self.user.isEmpty || self.photo == nil || self.timestamp == nil || self.longitude == nil || self.latitude == nil {
+            return false // No vital info must be missing
+        } else if self.laying || self.broken || self.misplaced || self.other {
+            return true // One description must be selected
         }
-        self.submittable = false;
+        return false
     }
-
-
+    
 }
-
 
 enum ScooterBrand: String {
     case none = "Unknown"
