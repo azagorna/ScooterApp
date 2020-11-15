@@ -1,13 +1,6 @@
-//
-//  UserReportsView.swift
-//  ScooterApp
-//
-//  Created by Gabriel Brodersen on 05/11/2020.
-//
-
 import SwiftUI
 
-struct ReportsScreenView: View {
+struct ReportsList: View {
 
     let reports = ["Report1", "Report2", "Report3", "..."]
 
@@ -20,6 +13,6 @@ struct ReportsScreenView: View {
 
 struct ReportsScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        ReportsScreenView()
+        ReportsList()
     }
 }

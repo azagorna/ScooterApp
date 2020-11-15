@@ -8,13 +8,14 @@
 import SwiftUI
 
 @main
-struct ScooterAppApp: App {
+struct ScooterApp: App {
     let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            MainView()
+            //            CoreDateExampleView()
+            //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

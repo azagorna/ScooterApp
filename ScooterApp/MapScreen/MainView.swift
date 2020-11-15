@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     
     @State private var screen: String? = "map"
-    @ObservedObject var locationManager = LocationManager()    
+    @ObservedObject var locationManager = LocationManager()
     
     var body: some View {
         NavigationView(content: {
@@ -18,9 +18,9 @@ struct MainView: View {
             ZStack {
                 MapView().ignoresSafeArea()
                 VStack {
-                    NavigationLink(destination: ReportsList(), tag: "reports", selection: $screen) {
+                    NavigationLink(destination: MyReportsView(), tag: "reports", selection: $screen) {
                         EmptyView()
-                    }.navigationBarTitle("Map", displayMode: .large).navigationBarHidden(true)
+                    }.navigationBarTitle("Map", displayMode: .inline).navigationBarHidden(true)
                     
                     HStack(alignment: .center) {
                         Button(action: { self.screen = "reports" }) {
@@ -35,10 +35,10 @@ struct MainView: View {
                         Spacer()
                     }
                     Spacer()
-                    NavigationLink(destination: ReportView().environmentObject(Report()), tag: "report", selection: $screen) {
+                    NavigationLink(destination: CameraScreenView(), tag: "camera", selection: $screen) {
                         EmptyView()
                     }
-                    Button(action: { self.screen = "report" }) {
+                    Button(action: { self.screen = "camera" }) {
                         Image(systemName: "plus")
                             .padding()
                             .background(Color.accentColor)

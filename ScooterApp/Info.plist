@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>ScooterApp lets you use your location to descibe where misplaced scooters are located</string>
+	<key>NSCameraUsageDescription</key>
+	<string>ScooterApp lets you use your camera to take a picture of a misplaced scooter</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>ScooterApp lets you use your location to descibe where misplaced scooters are located</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

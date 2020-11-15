@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  CoreDateExampleView.swift
 //  ScooterApp
 //
 //  Created by Gabriel Brodersen on 14/11/2020.
@@ -8,9 +8,9 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+struct CoreDateExampleView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
@@ -73,8 +73,8 @@ private let itemFormatter: DateFormatter = {
     return formatter
 }()
 
-struct ContentView_Previews: PreviewProvider {
+struct CoreDateExampleView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        CoreDateExampleView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
