@@ -9,12 +9,13 @@
         <attribute name="brandWind" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="broken" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="comment" optional="YES" attributeType="String"/>
-        <attribute name="image" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="laying" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="misplaced" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="other" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="otherViolation" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="photo" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="qrCode" optional="YES" attributeType="String"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
@@ -23,7 +24,7 @@
         <attribute name="password" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Report" positionX="37.2265625" positionY="-193.234375" width="128" height="268"/>
+        <element name="Report" positionX="37.2265625" positionY="-193.234375" width="128" height="283"/>
         <element name="User" positionX="-250.18359375" positionY="27.765625" width="128" height="88"/>
     </elements>
 </model>
