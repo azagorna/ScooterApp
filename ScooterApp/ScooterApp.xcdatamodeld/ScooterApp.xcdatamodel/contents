@@ -4,7 +4,7 @@
         <attribute name="brand" optional="YES" attributeType="String"/>
         <attribute name="broken" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="comment" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="laying" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
