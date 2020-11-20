@@ -13,16 +13,17 @@
 		C030E84E2560443D006D46DE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C030E84D2560443D006D46DE /* Preview Assets.xcassets */; };
 		C030E8502560443D006D46DE /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C030E84F2560443D006D46DE /* Persistence.swift */; };
 		C030E8532560443D006D46DE /* ScooterApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C030E8512560443D006D46DE /* ScooterApp.xcdatamodeld */; };
-		C09A9FF52560466E00CA3194 /* CustomCameraPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FEB2560466B00CA3194 /* CustomCameraPhotoView.swift */; };
-		C09A9FF62560466E00CA3194 /* CameraScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FEC2560466B00CA3194 /* CameraScreenView.swift */; };
+		C09A9FF62560466E00CA3194 /* GetPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FEC2560466B00CA3194 /* GetPhotoView.swift */; };
 		C09A9FF72560466E00CA3194 /* ReportsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FED2560466C00CA3194 /* ReportsList.swift */; };
 		C09A9FFA2560466E00CA3194 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF02560466D00CA3194 /* LocationManager.swift */; };
 		C09A9FFB2560466E00CA3194 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF12560466D00CA3194 /* Report.swift */; };
 		C09A9FFC2560466E00CA3194 /* ReportStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF22560466D00CA3194 /* ReportStore.swift */; };
 		C09A9FFD2560466E00CA3194 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF32560466E00CA3194 /* MapView.swift */; };
 		C09A9FFE2560466E00CA3194 /* TestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF42560466E00CA3194 /* TestingView.swift */; };
-		C09AA01525613EAA00CA3194 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09AA01425613EAA00CA3194 /* MainView.swift */; };
+		C09AA01525613EAA00CA3194 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09AA01425613EAA00CA3194 /* RootView.swift */; };
 		C0A773C425615B3C00A0532A /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A773C325615B3C00A0532A /* ReportView.swift */; };
+		C0C390EB2566A8A1008E08DB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C390EA2566A8A1008E08DB /* Coordinator.swift */; };
+		C0C390EF2566DD7E008E08DB /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,16 +35,17 @@
 		C030E84F2560443D006D46DE /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C030E8522560443D006D46DE /* ScooterApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScooterApp.xcdatamodel; sourceTree = "<group>"; };
 		C030E8542560443D006D46DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C09A9FEB2560466B00CA3194 /* CustomCameraPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCameraPhotoView.swift; sourceTree = "<group>"; };
-		C09A9FEC2560466B00CA3194 /* CameraScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraScreenView.swift; sourceTree = "<group>"; };
+		C09A9FEC2560466B00CA3194 /* GetPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPhotoView.swift; sourceTree = "<group>"; };
 		C09A9FED2560466C00CA3194 /* ReportsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportsList.swift; sourceTree = "<group>"; };
 		C09A9FF02560466D00CA3194 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		C09A9FF12560466D00CA3194 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		C09A9FF22560466D00CA3194 /* ReportStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportStore.swift; sourceTree = "<group>"; };
 		C09A9FF32560466E00CA3194 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		C09A9FF42560466E00CA3194 /* TestingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingView.swift; sourceTree = "<group>"; };
-		C09AA01425613EAA00CA3194 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		C09AA01425613EAA00CA3194 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		C0A773C325615B3C00A0532A /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReportView.swift; path = DataModel/ReportView.swift; sourceTree = "<group>"; };
+		C0C390EA2566A8A1008E08DB /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +87,7 @@
 				C09AA01225613E3500CA3194 /* ReportsScreen */,
 				C0A773C325615B3C00A0532A /* ReportView.swift */,
 				C030E8462560443C006D46DE /* ScooterApp.swift */,
-				C09AA01425613EAA00CA3194 /* MainView.swift */,
+				C09AA01425613EAA00CA3194 /* RootView.swift */,
 				C030E84A2560443D006D46DE /* Assets.xcassets */,
 				C030E8512560443D006D46DE /* ScooterApp.xcdatamodeld */,
 				C030E84C2560443D006D46DE /* Preview Content */,
@@ -104,8 +106,9 @@
 		C09AA000256138A900CA3194 /* CameraScreen */ = {
 			isa = PBXGroup;
 			children = (
-				C09A9FEC2560466B00CA3194 /* CameraScreenView.swift */,
-				C09A9FEB2560466B00CA3194 /* CustomCameraPhotoView.swift */,
+				C09A9FEC2560466B00CA3194 /* GetPhotoView.swift */,
+				C0C390EA2566A8A1008E08DB /* Coordinator.swift */,
+				C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */,
 			);
 			name = CameraScreen;
 			sourceTree = "<group>";
@@ -223,14 +226,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				C030E8502560443D006D46DE /* Persistence.swift in Sources */,
-				C09AA01525613EAA00CA3194 /* MainView.swift in Sources */,
+				C09AA01525613EAA00CA3194 /* RootView.swift in Sources */,
+				C0C390EB2566A8A1008E08DB /* Coordinator.swift in Sources */,
 				C09A9FFD2560466E00CA3194 /* MapView.swift in Sources */,
+				C0C390EF2566DD7E008E08DB /* CameraPickerView.swift in Sources */,
 				C09A9FFB2560466E00CA3194 /* Report.swift in Sources */,
 				C0A773C425615B3C00A0532A /* ReportView.swift in Sources */,
-				C09A9FF52560466E00CA3194 /* CustomCameraPhotoView.swift in Sources */,
 				C09A9FFE2560466E00CA3194 /* TestingView.swift in Sources */,
 				C030E8492560443C006D46DE /* CoreDateExampleView.swift in Sources */,
-				C09A9FF62560466E00CA3194 /* CameraScreenView.swift in Sources */,
+				C09A9FF62560466E00CA3194 /* GetPhotoView.swift in Sources */,
 				C030E8472560443C006D46DE /* ScooterApp.swift in Sources */,
 				C09A9FFC2560466E00CA3194 /* ReportStore.swift in Sources */,
 				C09A9FF72560466E00CA3194 /* ReportsList.swift in Sources */,

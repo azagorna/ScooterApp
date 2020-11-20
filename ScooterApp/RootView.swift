@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct RootView: View {
     
     @State private var screen: String? = "map"
     @ObservedObject var locationManager = LocationManager()    
@@ -56,7 +56,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        RootView()
     }
 }
 

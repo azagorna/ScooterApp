@@ -24,7 +24,7 @@ class Report: Identifiable, ObservableObject {
     
     let id: UUID
     let user = "Default" //Not used for now
-    @Published var photo: Image?
+    @Published var photo: UIImage?
     @Published var timestamp: Date? //Set when taking photo
     @Published var longitude: Double?
     @Published var latitude: Double?
@@ -38,6 +38,10 @@ class Report: Identifiable, ObservableObject {
     
     init() {
         self.id = UUID()
+    }
+    
+    func hasPhoto() -> Bool {
+        return photo != nil
     }
     
     func setTimestamp() {
@@ -71,6 +75,10 @@ class Report: Identifiable, ObservableObject {
         } else {
             self.brand = .none
         }
+    }
+    
+    func hasQRcode() -> Bool {
+        return qrCode != nil && !qrCode!.isEmpty
     }
     
     func getBrandName() -> String {
