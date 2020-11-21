@@ -48,8 +48,12 @@ struct ReportView: View {
                 Toggle("Other", isOn: $report.other)
             }
             
-            Section (header: Text("Comment")) {
-                TextField("Enter a comment", text: $report.comment)
+            Section (header: SectionHeaderText(text: "Comment", done: !report.comment.isEmpty, suffix: "(Optional)")) {
+                // Old Solution without "DONE" button
+                //TextField("Enter a comment", text: $report.comment)
+                
+                // Custom solution:
+                DoneTextField(placeholder: "Enter a comment", text: $report.comment, isfocusAble: false)
             }
             
             Section {

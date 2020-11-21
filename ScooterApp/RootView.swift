@@ -21,6 +21,8 @@ struct RootView: View {
                     NavigationLink(destination: ReportsList(), tag: "reports", selection: $screen) {
                         EmptyView()
                     }.navigationBarTitle("Map", displayMode: .large).navigationBarHidden(true)
+                    //.transition(.move(edge: .bottom))
+                    
                     
                     HStack(alignment: .center) {
                         Button(action: { self.screen = "reports" }) {
