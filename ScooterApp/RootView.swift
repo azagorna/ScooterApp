@@ -10,7 +10,7 @@ import SwiftUI
 struct RootView: View {
     
     @State private var screen: String? = "map"
-    @ObservedObject var locationManager = LocationManager()    
+    @ObservedObject var locationManager = LocationManager.singleton
     
     var body: some View {
         NavigationView(content: {
@@ -35,7 +35,7 @@ struct RootView: View {
                         Spacer()
                     }
                     Spacer()
-                    NavigationLink(destination: ReportView().environmentObject(Report()), tag: "report", selection: $screen) {
+                    NavigationLink(destination: ReportView(report: Report(), readOnly: false), tag: "report", selection: $screen) {
                         EmptyView()
                     }
                     Button(action: { self.screen = "report" }) {

@@ -47,7 +47,7 @@ struct GetPhotoButtonContentView: View {
             
             Image(uiImage: image!)
                 .resizable()
-                .aspectRatio(nil, contentMode: .fit)
+                .aspectRatio(nil, contentMode: .fill)
         } else {
             VStack{
                 Text(" ") // Bad solution
@@ -59,15 +59,17 @@ struct GetPhotoButtonContentView: View {
                     .padding(.horizontal)
                     .frame(minWidth: 0, idealWidth: 100, maxWidth: 120, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealHeight: 100, maxHeight: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     .foregroundColor(.white)
-                Text("Take Photo")
+                Text("Click to take a photo")
                     .foregroundColor(.white)
             }
         }
     }
 }
 
-//struct CameraScreenView_Preview: PreviewProvider {
-//    static var previews: some View {
-//        GetPhotoView()
-//    }
-//}
+struct GetPhotoView_Preview: PreviewProvider {
+    @State static var preview_photo: UIImage? = nil
+    
+    static var previews: some View {
+        GetPhotoView(photo: $preview_photo)
+    }
+}

@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ReportsList: View {
+    
 
     //let reports = ["Report1", "Report2", "Report3", "..."]
     
@@ -10,8 +11,8 @@ struct ReportsList: View {
     var body: some View
     {
         NavigationView {
-                List(ReportStore.shared.reports, id: \.self) { report in
-                    NavigationLink(destination: ReportView().environmentObject(report)) {
+                List(ReportStore.singleton.reports, id: \.self) { report in
+                    NavigationLink(destination: ReportView(report: report, readOnly: true)) {
                                     Label(report.id.uuidString, systemImage: "photo")
                     }
                 }.navigationBarTitle("My reports", displayMode: .inline)

@@ -8,22 +8,27 @@
 import SwiftUI
 
 struct ReportView: View {
-    @EnvironmentObject var report: Report
+    @StateObject var report: Report
     @State var showAlert = false
-    
+    let readOnly: Bool
+
     var body: some View {
         Form {
             
             //            Section (header: Text("Progress")) {
             //                ProgressView(value: 0.8)
             //            }
-            Section (header: SectionHeaderText(text: "Take a photo", done: report.hasPhoto(), suffix: "(Required)")) {
+            Section (header: SectionHeaderText(text: "Take a photo", done: report.photo != nil, suffix: "(Required)")) {
                 GeometryReader(content: { geometry in
-                    GetPhotoView(photo: $report.photo).frame(width: geometry.size.width, height: geometry.size.width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    GetPhotoView(photo: $report.photo)
+                        .frame(width: geometry.size.width, height: geometry.size.width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 })
                 .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
                 .listRowInsets(EdgeInsets())
             }
+            Text("Date: \(report.timestamp?.description ?? "No date set yet")")
+            Text("Latitude: \(report.latitude ?? 0.0)")
+            Text("Longitude: \(report.longitude ?? 0.0)")
             
             Section (header: SectionHeaderText(text: "Scan QR Code", done: report.hasQRcode(), suffix: "(Optional)")
                         ) {
@@ -36,7 +41,7 @@ struct ReportView: View {
                 }
             }
             
-            Section (header: Text("Type of violation")) {
+            Section (header: SectionHeaderText(text: "Type of violation", done: report.misplaced || report.laying || report.broken || report.other, suffix: "(Required)")) {
                 Toggle("Is Misplaced", isOn: $report.misplaced)
                 Toggle("Is Laying", isOn: $report.laying)
                 Toggle("Is Broken", isOn: $report.broken)
@@ -49,9 +54,9 @@ struct ReportView: View {
             
             Section {
                 Button("Submit", action: {//print("SUBMIT PRESSED")
-                    ReportStore.shared.addReport(report: report)
+                    ReportStore.singleton.addReport(report: report)
                     self.showAlert = true
-                }).disabled(!report.checkIfSubmittable())
+                })//.disabled(!report.checkIfSubmittable())
                 .alert(isPresented: $showAlert) {
                             Alert(
                                 title: Text("Thank you!"),
@@ -74,7 +79,8 @@ struct SectionHeaderText: View {
     
     var body: some View {
         if done {
-            Label(text, systemImage: "checkmark.circle.fill").foregroundColor(.green)
+            Label("Done", systemImage: "checkmark.circle.fill").foregroundColor(.green)
+                .flipsForRightToLeftLayoutDirection(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
         } else {
             HStack {
                 Text(text)
@@ -88,7 +94,7 @@ struct SectionHeaderText: View {
 struct ReportView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView(content: {
-            ReportView().environmentObject(Report())
+            ReportView(report: Report(), readOnly: false)
         }).navigationBarTitle("Map", displayMode: .large)
     }
 }

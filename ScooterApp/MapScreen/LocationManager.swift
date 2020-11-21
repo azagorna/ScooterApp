@@ -3,6 +3,8 @@ import CoreLocation
 import Combine
 
 class LocationManager: NSObject, ObservableObject {
+    
+    static let singleton = LocationManager()
 
     override init() {
         super.init()

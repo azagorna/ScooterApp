@@ -1,21 +1,15 @@
-//
-//  ReportStore.swift
-//  ScooterApp
-//
-//  Created by Gabriel Brodersen on 05/11/2020.
-//
 
 import Foundation
 
 class ReportStore{
     
-    static let shared = ReportStore()
+    static let singleton = ReportStore()
 
     //testing version - to be deleted
     var report1: Report = Report()
     var report2: Report = Report()
     var reports = [Report]()
-    init() {
+    private init() {
         report1.setTimestamp()
         try? report1.setLocation()
         report1.broken = true

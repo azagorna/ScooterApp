@@ -21,10 +21,17 @@ extension Report: Hashable {
 }
 
 class Report: Identifiable, ObservableObject {
-    
+    private let locationManager = LocationManager.singleton
     let id: UUID
     let user = "Default" //Not used for now
-    @Published var photo: UIImage?
+    @Published var photo: UIImage? { didSet {
+        self.setTimestamp()
+        do {
+            try self.setLocation()
+        } catch {
+            print("Cant find location: \(error)")
+        }        
+    }}
     @Published var timestamp: Date? //Set when taking photo
     @Published var longitude: Double?
     @Published var latitude: Double?
@@ -49,15 +56,12 @@ class Report: Identifiable, ObservableObject {
     }
     
     func setLocation() throws {
-        let locationManager = LocationManager()
-        
-        if let long = locationManager.lastLocation?.coordinate.longitude, let lat = locationManager.lastLocation?.coordinate.latitude {
+        if let long = self.locationManager.lastLocation?.coordinate.longitude, let lat = locationManager.lastLocation?.coordinate.latitude {
             self.longitude = long
             self.latitude = lat
         } else {
             throw ReportErrors.cantFindLocation("setLocation() could not find location:" + locationManager.statusString)
         }
-        
     }
     
     func setQRCodeAndBrand(_ url: String) {
