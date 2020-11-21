@@ -30,7 +30,7 @@ class Report: Identifiable, ObservableObject {
             try self.setLocation()
         } catch {
             print("Cant find location: \(error)")
-        }        
+        }
     }}
     @Published var timestamp: Date? //Set when taking photo
     @Published var longitude: Double?
