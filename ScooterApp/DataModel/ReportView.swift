@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ReportView: View {
     @EnvironmentObject var report: Report
+    @State var showAlert = false
     
     var body: some View {
         Form {
@@ -30,7 +31,7 @@ struct ReportView: View {
                     HStack {
                         Image(systemName: "barcode.viewfinder")
                         Divider()
-                        Text("\(report.brand.rawValue)")
+                        Text("Brand of the scooter: \(report.brand.rawValue)")
                     }
                 }
             }
@@ -47,10 +48,19 @@ struct ReportView: View {
             }
             
             Section {
-                Button("Submit", action: {print("SUBMIT PRESSED")}).disabled(!report.checkIfSubmittable())
+                Button("Submit", action: {//print("SUBMIT PRESSED")
+                    ReportStore.shared.addReport(report: report)
+                    self.showAlert = true
+                }).disabled(!report.checkIfSubmittable())
+                .alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text("Thank you!"),
+                                message: Text("Your reports help us improve!")
+                            )
+                        }
             }
         }
-        .navigationBarTitle("New Report")
+        .navigationBarTitle("Report")
         //        .navigationBarItems(trailing:
         //                                Button("Submit", action: {print("SUBMIT PRESSED")}).disabled(!report.checkIfSubmittable())
         //        )
