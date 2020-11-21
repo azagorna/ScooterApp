@@ -10,6 +10,7 @@ import SwiftUI
 struct ReportView: View {
     @EnvironmentObject var report: Report
     @State var showAlert = false
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
         Form {
@@ -51,7 +52,8 @@ struct ReportView: View {
                 Button("Submit", action: {//print("SUBMIT PRESSED")
                     ReportStore.shared.addReport(report: report)
                     self.showAlert = true
-                }).disabled(!report.checkIfSubmittable())
+                    self.mode.wrappedValue.dismiss()
+                })//.disabled(!report.checkIfSubmittable())
                 .alert(isPresented: $showAlert) {
                             Alert(
                                 title: Text("Thank you!"),

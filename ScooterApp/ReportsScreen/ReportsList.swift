@@ -1,10 +1,7 @@
 import SwiftUI
 
 struct ReportsList: View {
-
-    //let reports = ["Report1", "Report2", "Report3", "..."]
     
-//TODO: change UUID to something readable, but what? Date?
 //TODO: maybe fix the double navigation bar
 
     var body: some View
