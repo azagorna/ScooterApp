@@ -14,19 +14,19 @@ struct GetPhotoView: View {
                 if UIImagePickerController.isSourceTypeAvailable(.camera) {
                     //...then use it to take a photo
                     Button(action: {
-                        sourceType = .photoLibrary
+                        sourceType = .camera
                         isImagePickerDisplay.toggle()
                     }) {
-                        GetPhotoButtonContentView(image: photo)
+                        GetPhotoButtonContentView(image: $photo)
                             .frame(width: squareSize, height: squareSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     }
                 } else {
                     //...else pick from camera roll
                     Button(action: {
-                        sourceType = .camera
+                        sourceType = .photoLibrary
                         isImagePickerDisplay.toggle()
                     }) {
-                        GetPhotoButtonContentView(image: photo)
+                        GetPhotoButtonContentView(image: $photo)
                             .frame(width: squareSize, height: squareSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     }
                 }
@@ -40,7 +40,7 @@ struct GetPhotoView: View {
 }
 
 struct GetPhotoButtonContentView: View {
-    let image: UIImage?
+    @Binding var image: UIImage?
     
     var body: some View {
         if image != nil {
@@ -48,7 +48,6 @@ struct GetPhotoButtonContentView: View {
             Image(uiImage: image!)
                 .resizable()
                 .aspectRatio(nil, contentMode: .fit)
-            
         } else {
             VStack{
                 Text(" ") // Bad solution
