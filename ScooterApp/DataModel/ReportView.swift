@@ -51,7 +51,7 @@ struct ReportView: View {
                 Button("Submit", action: {//print("SUBMIT PRESSED")
                     ReportStore.shared.addReport(report: report)
                     self.showAlert = true
-                }).disabled(!report.checkIfSubmittable())
+                })//.disabled(!report.checkIfSubmittable())
                 .alert(isPresented: $showAlert) {
                             Alert(
                                 title: Text("Thank you!"),

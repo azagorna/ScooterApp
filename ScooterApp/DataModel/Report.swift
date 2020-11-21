@@ -24,7 +24,11 @@ class Report: Identifiable, ObservableObject {
     
     let id: UUID
     let user = "Default" //Not used for now
-    @Published var photo: UIImage?
+    @Published var photo: UIImage? {didSet{
+        self.setTimestamp()
+        //try!self.setLocation()
+    }}
+    
     @Published var timestamp: Date? //Set when taking photo
     @Published var longitude: Double?
     @Published var latitude: Double?
