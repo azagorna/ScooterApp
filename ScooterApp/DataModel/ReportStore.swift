@@ -19,6 +19,12 @@ class ReportStore{
     private init() {
         //Firebase Stuff
         self.storageRef = storage.reference()
+        
+        //FOR TESTING ONLY, FAKE REPORTS:
+//        self.reports["test1"] = Report(id: "test1", user: "Tester", timestamp: Date(), longitude: 55.0, latitude: 13.0, qrCode: "", laying: true, broken: false, misplaced: true, other: false, comment: "Hello there")
+//        self.photos["test1.jpg"] = UIImage(named: "image_of_lime_scooter")
+//        self.reports["test2"] = Report(id: "test2", user: "Tester", timestamp: Date().advanced(by: 100.0), longitude: 56.0, latitude: 12.0, qrCode: "", laying: false, broken: true, misplaced: false, other: true, comment: "Hello again")
+//        self.photos["test2.jpg"] = UIImage(named: "image_of_voi_scooter")
     }
     
     func getReportsListByDate() -> [Report] {
@@ -110,7 +116,7 @@ class ReportStore{
                 }
             }
         } else {
-            print("\(filename) was already in downloaded photos")
+            print("Skipping \(filename), it was already in downloaded photos.")
         }
     }
     
@@ -133,33 +139,34 @@ class ReportStore{
                     let id: String = data["id"] as! String
                     
                     // Check if report is already loaded. If, then don't download it
-                    guard self.reports[id] != nil else {
-                        print("Skipping loading report with id: \(id)")
-                        break
+                    if ReportStore.singleton.reports[id] == nil  {
+                        
+                        let user: String = data["user"] as! String
+                        let photoFilename: String = data["photoFilename"] as! String
+                        let timestamp = (data["timestamp"] as! Timestamp).dateValue()
+                        let longitude = (data["geolocation"] as! GeoPoint).longitude
+                        let latitude = (data["geolocation"] as! GeoPoint).latitude
+                        let qrCode: String = data["qrCode"] as! String
+                        //let brand: String = data["brand"] as! String
+                        let laying: Bool = self.anyIntToBool(data["laying"])
+                        let broken: Bool = self.anyIntToBool(data["broken"])
+                        let misplaced: Bool = self.anyIntToBool(data["misplaced"])
+                        let other: Bool = self.anyIntToBool(data["other"])
+                        let comment: String = data["comment"] as! String
+                                        
+                        let newReport = Report(id: id, user: user, timestamp: timestamp, longitude: longitude, latitude: latitude, qrCode: qrCode, laying: laying, broken: broken, misplaced: misplaced, other: other, comment: comment)
+                        
+                        print("Adding report with id: \(id)")
+                        ReportStore.singleton.reports[id] = newReport
+                        
+                        // Download report photo
+                        self.downloadPhoto(filename: photoFilename)
+                                                
+                    } else {
+                        //Skip loading already existing and continue to next report
+                        print("Skipping already loaded report with id: \(id)")
                     }
                     
-                    let user: String = data["user"] as! String
-                    let photoFilename: String = data["photoFilename"] as! String
-                    let timestamp = (data["timestamp"] as! Timestamp).dateValue()
-                    let longitude = (data["geolocation"] as! GeoPoint).longitude
-                    let latitude = (data["geolocation"] as! GeoPoint).latitude
-                    let qrCode: String = data["qrCode"] as! String
-                    //let brand: String = data["brand"] as! String
-                    let laying: Bool = self.anyIntToBool(data["laying"])
-                    let broken: Bool = self.anyIntToBool(data["broken"])
-                    let misplaced: Bool = self.anyIntToBool(data["misplaced"])
-                    let other: Bool = self.anyIntToBool(data["other"])
-                    let comment: String = data["comment"] as! String
-                    
-                    // Download report photo
-                    self.downloadPhoto(filename: photoFilename)                                    
-                    
-                    let newReport = Report(id: id, user: user, timestamp: timestamp, longitude: longitude, latitude: latitude, qrCode: qrCode, laying: laying, broken: broken, misplaced: misplaced, other: other, comment: comment)
-                    
-                    print("Adding report with id: \(id)")
-                    self.reports[id] = newReport
-                    
-                    //print("\(document.documentID) => \(document.data())")
                 }
             }
         }

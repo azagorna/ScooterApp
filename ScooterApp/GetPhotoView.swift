@@ -34,8 +34,8 @@ struct GetPhotoView: View {
         }
         .background(Color.black)
         .sheet(isPresented: $isImagePickerDisplay) {
-            CameraPickerView(selectedImage: $photo, sourceType: sourceType)
-        }
+            CameraPickerView(selectedImage: $photo, sourceType: sourceType).ignoresSafeArea()
+        }.ignoresSafeArea()
     }
 }
 

@@ -19,7 +19,7 @@ struct ScooterApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView()
+            MainView()
             //            CoreDateExampleView()
             //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }

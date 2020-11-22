@@ -10,17 +10,17 @@ import SwiftUI
 struct ReportView: View {
     @StateObject var report: Report
     @State var showAlert = false
-    let readOnly: Bool
 
     var body: some View {
         Form {
-            
-            //            Section (header: Text("Progress")) {
-            //                ProgressView(value: 0.8)
-            //            }
             Section (header: SectionHeaderText(text: "Take a photo", done: report.photo != nil, suffix: "(Required)")) {
                 GeometryReader(content: { geometry in
-                    GetPhotoView(photo: $report.photo)
+                    GetPhotoView(photo: $report.photo).ignoresSafeArea().onDisappear(perform: {
+                        if report.photo != nil {
+                            report.setTimestamp()
+                            report.setLocation()
+                        }
+                    })
                         .frame(width: geometry.size.width, height: geometry.size.width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 })
                 .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
@@ -50,10 +50,11 @@ struct ReportView: View {
             
             Section (header: SectionHeaderText(text: "Comment", done: !report.comment.isEmpty, suffix: "(Optional)")) {
                 // Old Solution without "DONE" button
-                //TextField("Enter a comment", text: $report.comment)
-                
+                TextField("Enter a comment", text: $report.comment)
+                                
                 // Custom solution:
-                DoneTextField(placeholder: "Enter a comment", text: $report.comment, isfocusAble: false)
+                //DoneTextField(placeholder: "Enter a comment", text: $report.comment, isfocusAble: false)
+                
             }
             
             Section {
@@ -100,7 +101,7 @@ struct SectionHeaderText: View {
 struct ReportView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView(content: {
-            ReportView(report: Report(), readOnly: false)
+            ReportView(report: Report())
         }).navigationBarTitle("Map", displayMode: .large)
     }
 }

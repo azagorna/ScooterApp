@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A2A26579051C63F5C8BB8D81 /* Pods_ScooterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 622B10D7C4BC729AB32030D1 /* Pods_ScooterApp.framework */; };
 		C00E5682256A6ADB00EA9A81 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C00E5681256A6ADB00EA9A81 /* GoogleService-Info.plist */; };
 		C030E8472560443C006D46DE /* ScooterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C030E8462560443C006D46DE /* ScooterApp.swift */; };
 		C030E8492560443C006D46DE /* CoreDateExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C030E8482560443C006D46DE /* CoreDateExampleView.swift */; };
@@ -23,16 +22,17 @@
 		C09A9FFC2560466E00CA3194 /* ReportStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF22560466D00CA3194 /* ReportStore.swift */; };
 		C09A9FFD2560466E00CA3194 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF32560466E00CA3194 /* MapView.swift */; };
 		C09A9FFE2560466E00CA3194 /* TestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF42560466E00CA3194 /* TestingView.swift */; };
-		C09AA01525613EAA00CA3194 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09AA01425613EAA00CA3194 /* RootView.swift */; };
+		C09AA01525613EAA00CA3194 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09AA01425613EAA00CA3194 /* MainView.swift */; };
 		C09AE420256AC36600A76396 /* ReportPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09AE41F256AC36600A76396 /* ReportPreview.swift */; };
 		C0A773C425615B3C00A0532A /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A773C325615B3C00A0532A /* ReportView.swift */; };
 		C0C390EB2566A8A1008E08DB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C390EA2566A8A1008E08DB /* Coordinator.swift */; };
 		C0C390EF2566DD7E008E08DB /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */; };
+		C0F5E661256B0E090020D972 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F5E660256B0E090020D972 /* Extension+UIImage.swift */; };
+		E3D1FEF17EA3DF046B8DF10F /* Pods_ScooterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7572BBDC7EC9985CAD33AA4 /* Pods_ScooterApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		622B10D7C4BC729AB32030D1 /* Pods_ScooterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScooterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E5F583691EE5EC9FD6CF64A /* Pods-ScooterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScooterApp.release.xcconfig"; path = "Target Support Files/Pods-ScooterApp/Pods-ScooterApp.release.xcconfig"; sourceTree = "<group>"; };
+		4D747ADC128663881B9BB3BF /* Pods-ScooterApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScooterApp.release.xcconfig"; path = "Target Support Files/Pods-ScooterApp/Pods-ScooterApp.release.xcconfig"; sourceTree = "<group>"; };
 		C00E5681256A6ADB00EA9A81 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C030E8432560443C006D46DE /* ScooterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScooterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C030E8462560443C006D46DE /* ScooterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterApp.swift; sourceTree = "<group>"; };
@@ -50,12 +50,14 @@
 		C09A9FF22560466D00CA3194 /* ReportStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportStore.swift; sourceTree = "<group>"; };
 		C09A9FF32560466E00CA3194 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		C09A9FF42560466E00CA3194 /* TestingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingView.swift; sourceTree = "<group>"; };
-		C09AA01425613EAA00CA3194 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		C09AA01425613EAA00CA3194 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C09AE41F256AC36600A76396 /* ReportPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPreview.swift; sourceTree = "<group>"; };
 		C0A773C325615B3C00A0532A /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		C0C390EA2566A8A1008E08DB /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
-		CB9A2981BF276099D2FA70C9 /* Pods-ScooterApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScooterApp.debug.xcconfig"; path = "Target Support Files/Pods-ScooterApp/Pods-ScooterApp.debug.xcconfig"; sourceTree = "<group>"; };
+		C0F5E660256B0E090020D972 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
+		E7572BBDC7EC9985CAD33AA4 /* Pods_ScooterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScooterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC0180BCD075EC0C44F777D7 /* Pods-ScooterApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScooterApp.debug.xcconfig"; path = "Target Support Files/Pods-ScooterApp/Pods-ScooterApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,17 +65,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2A26579051C63F5C8BB8D81 /* Pods_ScooterApp.framework in Frameworks */,
+				E3D1FEF17EA3DF046B8DF10F /* Pods_ScooterApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		50DC6E8D61627FB58C4F37B2 /* Frameworks */ = {
+		176D06499E39E4F058F4C52B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				622B10D7C4BC729AB32030D1 /* Pods_ScooterApp.framework */,
+				E7572BBDC7EC9985CAD33AA4 /* Pods_ScooterApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -81,8 +83,8 @@
 		BB82D6F58D56AAE61715C938 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CB9A2981BF276099D2FA70C9 /* Pods-ScooterApp.debug.xcconfig */,
-				9E5F583691EE5EC9FD6CF64A /* Pods-ScooterApp.release.xcconfig */,
+				EC0180BCD075EC0C44F777D7 /* Pods-ScooterApp.debug.xcconfig */,
+				4D747ADC128663881B9BB3BF /* Pods-ScooterApp.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -93,7 +95,7 @@
 				C030E8452560443C006D46DE /* ScooterApp */,
 				C030E8442560443C006D46DE /* Products */,
 				BB82D6F58D56AAE61715C938 /* Pods */,
-				50DC6E8D61627FB58C4F37B2 /* Frameworks */,
+				176D06499E39E4F058F4C52B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +110,7 @@
 		C030E8452560443C006D46DE /* ScooterApp */ = {
 			isa = PBXGroup;
 			children = (
+				C0F5E660256B0E090020D972 /* Extension+UIImage.swift */,
 				C030E8542560443D006D46DE /* Info.plist */,
 				C00E5681256A6ADB00EA9A81 /* GoogleService-Info.plist */,
 				C09AA004256138E900CA3194 /* DataModel */,
@@ -115,10 +118,10 @@
 				C09AA000256138A900CA3194 /* CameraScreen */,
 				C09AA002256138D700CA3194 /* MapScreen */,
 				C09AA0062561393400CA3194 /* Testing */,
-				C09AA01225613E3500CA3194 /* ReportsScreen */,
+				C09AA01225613E3500CA3194 /* MyReportsScreen */,
 				C060B0582569562D00A0C720 /* CreatingReportScreen */,
+				C09AA01425613EAA00CA3194 /* MainView.swift */,
 				C030E8462560443C006D46DE /* ScooterApp.swift */,
-				C09AA01425613EAA00CA3194 /* RootView.swift */,
 				C030E84A2560443D006D46DE /* Assets.xcassets */,
 				C030E8512560443D006D46DE /* ScooterApp.xcdatamodeld */,
 				C030E84C2560443D006D46DE /* Preview Content */,
@@ -188,13 +191,13 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		C09AA01225613E3500CA3194 /* ReportsScreen */ = {
+		C09AA01225613E3500CA3194 /* MyReportsScreen */ = {
 			isa = PBXGroup;
 			children = (
 				C09A9FED2560466C00CA3194 /* ReportsList.swift */,
 				C09AE41F256AC36600A76396 /* ReportPreview.swift */,
 			);
-			path = ReportsScreen;
+			path = MyReportsScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,11 +207,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C030E8572560443D006D46DE /* Build configuration list for PBXNativeTarget "ScooterApp" */;
 			buildPhases = (
-				9A63517E78609FA549E5241F /* [CP] Check Pods Manifest.lock */,
+				3BCCA8FB35A4EA71A966EA2C /* [CP] Check Pods Manifest.lock */,
 				C030E83F2560443C006D46DE /* Sources */,
 				C030E8402560443C006D46DE /* Frameworks */,
 				C030E8412560443C006D46DE /* Resources */,
-				EB321A1B7164E91065D3C913 /* [CP] Embed Pods Frameworks */,
+				BF0EDDC5D7EFB2690404E8BA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -265,7 +268,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9A63517E78609FA549E5241F /* [CP] Check Pods Manifest.lock */ = {
+		3BCCA8FB35A4EA71A966EA2C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -287,7 +290,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EB321A1B7164E91065D3C913 /* [CP] Embed Pods Frameworks */ = {
+		BF0EDDC5D7EFB2690404E8BA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -312,7 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C030E8502560443D006D46DE /* Persistence.swift in Sources */,
-				C09AA01525613EAA00CA3194 /* RootView.swift in Sources */,
+				C09AA01525613EAA00CA3194 /* MainView.swift in Sources */,
 				C0C390EB2566A8A1008E08DB /* Coordinator.swift in Sources */,
 				C09A9FFD2560466E00CA3194 /* MapView.swift in Sources */,
 				C0C390EF2566DD7E008E08DB /* CameraPickerView.swift in Sources */,
@@ -327,6 +330,7 @@
 				C09A9FF72560466E00CA3194 /* ReportsList.swift in Sources */,
 				C060B05B2569565D00A0C720 /* DoneTextField.swift in Sources */,
 				C030E8532560443D006D46DE /* ScooterApp.xcdatamodeld in Sources */,
+				C0F5E661256B0E090020D972 /* Extension+UIImage.swift in Sources */,
 				C09A9FFA2560466E00CA3194 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,7 +456,7 @@
 		};
 		C030E8582560443D006D46DE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB9A2981BF276099D2FA70C9 /* Pods-ScooterApp.debug.xcconfig */;
+			baseConfigurationReference = EC0180BCD075EC0C44F777D7 /* Pods-ScooterApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -475,7 +479,7 @@
 		};
 		C030E8592560443D006D46DE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E5F583691EE5EC9FD6CF64A /* Pods-ScooterApp.release.xcconfig */;
+			baseConfigurationReference = 4D747ADC128663881B9BB3BF /* Pods-ScooterApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
