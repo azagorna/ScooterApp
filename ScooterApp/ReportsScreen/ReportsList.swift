@@ -1,14 +1,7 @@
 import SwiftUI
 
 struct ReportsList: View {
-    let placeholder: UIImage = UIImage(named: "placeholder_missing_scooter")!
-    //let placeholder: UIImage = UIImage(named: "image_of_lime_scooter")!
     
-    
-    //let reports = ["Report1", "Report2", "Report3", "..."]
-    
-    //TODO: change UUID to something readable, but what? Date?
-    //TODO: maybe fix the double navigation bar
     
     func formatDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -18,28 +11,32 @@ struct ReportsList: View {
         return dateFormatter.string(from: date)
     }
     
-    var body: some View
-    {
-        List(ReportStore.singleton.reports, id: \.self) { report in
-            NavigationLink(destination: ReportView(report: report, readOnly: true)) {
-                HStack() {
-                    Image(uiImage: report.photo ?? placeholder)
-                        .resizable()
-                        .cornerRadius(8)
-                        .aspectRatio(nil, contentMode: .fill)
-                        .frame(width: 80, height: 80, alignment: .center)
-                        .clipped()
-                    
-                    VStack(){
-                        Text(
-                            formatDate(date: report.timestamp!))
-                            .lineLimit(2)
+    func getReportPhoto(_ report: Report) -> UIImage {
+        return ReportStore.singleton.findPhoto(filename: report.photoFilename)
+    }
+    
+    var body: some View {
+        List{
+            ForEach(ReportStore.singleton.getReportsListByDate()) { report in
+                NavigationLink(destination: ReportPreview(report: report, photo: getReportPhoto(report))) {
+                    HStack() {
+                        Image(uiImage: getReportPhoto(report))
+                            .resizable()
+                            .cornerRadius(8)
+                            .aspectRatio(nil, contentMode: .fill)
+                            .frame(width: 80, height: 80, alignment: .center)
+                            .clipped()
+                        
+                        VStack(){
+                            Text(
+                                formatDate(date: report.timestamp!))
+                                .lineLimit(2)
+                        }
+                        Spacer()
                     }
-                    Spacer()
                 }
             }
         }.navigationBarTitle("My reports", displayMode: .inline)
-        
     }
 }
 

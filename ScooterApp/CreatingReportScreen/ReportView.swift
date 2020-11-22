@@ -57,8 +57,10 @@ struct ReportView: View {
             }
             
             Section {
-                Button("Submit", action: {//print("SUBMIT PRESSED")
-                    ReportStore.singleton.addReport(report: report)
+                Button("Submit", action: {
+                    ReportStore.singleton.uploadPhoto(image: report.photo!, name: report.photoFilename)
+                    ReportStore.singleton.uploadReport(report: report)
+                    //ReportStore.singleton.addReport(report: report)
                     self.showAlert = true
                 })//.disabled(!report.checkIfSubmittable())
                 .alert(isPresented: $showAlert) {

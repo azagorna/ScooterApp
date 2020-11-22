@@ -22,8 +22,9 @@ extension Report: Hashable {
 
 class Report: Identifiable, ObservableObject {
     private let locationManager = LocationManager.singleton
-    let id: UUID
-    let user = "Default" //Not used for now
+    let id: String
+    let photoFilename: String
+    let user: String //Not used for now
     @Published var photo: UIImage? { didSet {
         self.setTimestamp()
         do {
@@ -35,7 +36,7 @@ class Report: Identifiable, ObservableObject {
     @Published var timestamp: Date? //Set when taking photo
     @Published var longitude: Double?
     @Published var latitude: Double?
-    @Published var qrCode: String?
+    @Published var qrCode: QRCode = .none
     @Published var brand: ScooterBrand = .none
     @Published var laying = false
     @Published var broken = false
@@ -44,7 +45,25 @@ class Report: Identifiable, ObservableObject {
     @Published var comment = ""
     
     init() {
-        self.id = UUID()
+        self.user = "Default"
+        self.id = UUID().uuidString
+        self.photoFilename = self.id + ".jpg"
+    }
+    
+    init(id: String, user: String, timestamp : Date, longitude: Double, latitude: Double, qrCode: String, laying: Bool, broken: Bool, misplaced: Bool, other: Bool, comment: String){
+        self.id = id
+        self.user = user
+        self.photoFilename = self.id
+        self.photo = nil
+        self.timestamp = timestamp
+        self.longitude = longitude
+        self.latitude = latitude
+        self.setQRCode(qrCode)
+        self.laying = laying
+        self.broken = broken
+        self.misplaced = misplaced
+        self.other = other
+        self.comment = comment
     }
     
     func hasPhoto() -> Bool {
@@ -64,28 +83,49 @@ class Report: Identifiable, ObservableObject {
         }
     }
     
-    func setQRCodeAndBrand(_ url: String) {
-        self.qrCode = url
-        if (url.contains("lime")) {
-            self.brand = .lime
-        } else if (url.contains("tier")) {
-            self.brand = .tier
-        } else if (url.contains("bird")) {
-            self.brand = .bird
-        } else if (url.contains("wind")) {
-            self.brand = .wind
-        } else if (url.contains("circ")) {
-            self.brand = .circ
-        } else {
-            self.brand = .none
+    func setQRCode(_ url: String) {
+        if url.isEmpty {
+            self.qrCode = .none
         }
+        self.qrCode = .url(url)
+        setBrand()
     }
     
     func hasQRcode() -> Bool {
-        return qrCode != nil && !qrCode!.isEmpty
+        return self.qrCode == .none
     }
     
-    func getBrandName() -> String {
+    func getQRcodeAsString() -> String {
+        switch self.qrCode {
+            case .none:
+                return ""
+            case .url(let url):
+                return url
+        }
+    }
+    
+    func setBrand() {
+        switch self.qrCode {
+            case .url(let url):
+                if (url.contains("li.me")) {
+                    self.brand = .lime
+                } else if (url.contains("tier")) {
+                    self.brand = .tier
+                } else if (url.contains("bird")) {
+                    self.brand = .bird
+                } else if (url.contains("wind")) {
+                    self.brand = .wind
+                } else if (url.contains("circ")) {
+                    self.brand = .circ
+                } else {
+                    self.brand = .none
+                }
+            case .none:
+                self.brand = .none
+        }
+    }
+    
+    func getBrandAsString() -> String {
         return self.brand.rawValue
     }
     
@@ -107,4 +147,9 @@ enum ScooterBrand: String {
     case bird = "Bird"
     case wind = "Wind"
     case circ = "Circ"
+}
+
+enum QRCode: Equatable {
+    case none
+    case url(String)
 }

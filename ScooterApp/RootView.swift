@@ -12,6 +12,7 @@ struct RootView: View {
     @State private var screen: String? = "map"
     @ObservedObject var locationManager = LocationManager.singleton
     
+    
     var body: some View {
         NavigationView(content: {
             
@@ -51,7 +52,7 @@ struct RootView: View {
                     }
                     .buttonStyle(DefaultButtonStyle())
                 }.padding()
-            }
+            }.onAppear(perform: ReportStore.singleton.downloadReports).onAppear(perform: {print("GETTING DATA FROM FIREBASE")})
         })
     }
 }
