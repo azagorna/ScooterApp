@@ -24,6 +24,11 @@
 		C09A9FFE2560466E00CA3194 /* TestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF42560466E00CA3194 /* TestingView.swift */; };
 		C09AA01525613EAA00CA3194 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09AA01425613EAA00CA3194 /* MainView.swift */; };
 		C09AE420256AC36600A76396 /* ReportPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09AE41F256AC36600A76396 /* ReportPreview.swift */; };
+		C09EB1F7256FB8BC00252807 /* QrCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09EB1F6256FB8BC00252807 /* QrCodeScannerView.swift */; };
+		C09EB1FD256FB90000252807 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09EB1FC256FB90000252807 /* CameraPreview.swift */; };
+		C09EB200256FB92500252807 /* QrCodeCameraDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09EB1FF256FB92500252807 /* QrCodeCameraDelegate.swift */; };
+		C09EB203256FB9FA00252807 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09EB202256FB9FA00252807 /* ScannerView.swift */; };
+		C09EB206256FBA1700252807 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09EB205256FBA1700252807 /* ScannerViewModel.swift */; };
 		C0A773C425615B3C00A0532A /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A773C325615B3C00A0532A /* ReportView.swift */; };
 		C0C390EB2566A8A1008E08DB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C390EA2566A8A1008E08DB /* Coordinator.swift */; };
 		C0C390EF2566DD7E008E08DB /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */; };
@@ -52,6 +57,11 @@
 		C09A9FF42560466E00CA3194 /* TestingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingView.swift; sourceTree = "<group>"; };
 		C09AA01425613EAA00CA3194 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C09AE41F256AC36600A76396 /* ReportPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPreview.swift; sourceTree = "<group>"; };
+		C09EB1F6256FB8BC00252807 /* QrCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeScannerView.swift; sourceTree = "<group>"; };
+		C09EB1FC256FB90000252807 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
+		C09EB1FF256FB92500252807 /* QrCodeCameraDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeCameraDelegate.swift; sourceTree = "<group>"; };
+		C09EB202256FB9FA00252807 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		C09EB205256FBA1700252807 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
 		C0A773C325615B3C00A0532A /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		C0C390EA2566A8A1008E08DB /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
@@ -120,6 +130,7 @@
 				C09AA0062561393400CA3194 /* Testing */,
 				C09AA01225613E3500CA3194 /* MyReportsScreen */,
 				C060B0582569562D00A0C720 /* CreatingReportScreen */,
+				C09EB1F9256FB8C100252807 /* QRScanner */,
 				C09AA01425613EAA00CA3194 /* MainView.swift */,
 				C030E8462560443C006D46DE /* ScooterApp.swift */,
 				C030E84A2560443D006D46DE /* Assets.xcassets */,
@@ -198,6 +209,18 @@
 				C09AE41F256AC36600A76396 /* ReportPreview.swift */,
 			);
 			path = MyReportsScreen;
+			sourceTree = "<group>";
+		};
+		C09EB1F9256FB8C100252807 /* QRScanner */ = {
+			isa = PBXGroup;
+			children = (
+				C09EB1F6256FB8BC00252807 /* QrCodeScannerView.swift */,
+				C09EB1FF256FB92500252807 /* QrCodeCameraDelegate.swift */,
+				C09EB1FC256FB90000252807 /* CameraPreview.swift */,
+				C09EB202256FB9FA00252807 /* ScannerView.swift */,
+				C09EB205256FBA1700252807 /* ScannerViewModel.swift */,
+			);
+			path = QRScanner;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,9 +342,13 @@
 				C0C390EB2566A8A1008E08DB /* Coordinator.swift in Sources */,
 				C09A9FFD2560466E00CA3194 /* MapView.swift in Sources */,
 				C0C390EF2566DD7E008E08DB /* CameraPickerView.swift in Sources */,
+				C09EB1FD256FB90000252807 /* CameraPreview.swift in Sources */,
 				C09A9FFB2560466E00CA3194 /* Report.swift in Sources */,
 				C0A773C425615B3C00A0532A /* ReportView.swift in Sources */,
 				C09A9FFE2560466E00CA3194 /* TestingView.swift in Sources */,
+				C09EB203256FB9FA00252807 /* ScannerView.swift in Sources */,
+				C09EB200256FB92500252807 /* QrCodeCameraDelegate.swift in Sources */,
+				C09EB206256FBA1700252807 /* ScannerViewModel.swift in Sources */,
 				C030E8492560443C006D46DE /* CoreDateExampleView.swift in Sources */,
 				C09A9FF62560466E00CA3194 /* GetPhotoView.swift in Sources */,
 				C030E8472560443C006D46DE /* ScooterApp.swift in Sources */,
@@ -332,6 +359,7 @@
 				C030E8532560443D006D46DE /* ScooterApp.xcdatamodeld in Sources */,
 				C0F5E661256B0E090020D972 /* Extension+UIImage.swift in Sources */,
 				C09A9FFA2560466E00CA3194 /* LocationManager.swift in Sources */,
+				C09EB1F7256FB8BC00252807 /* QrCodeScannerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

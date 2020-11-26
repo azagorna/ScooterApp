@@ -10,11 +10,18 @@ import SwiftUI
 struct ReportView: View {
     @StateObject var report: Report
     @State var showAlert = false
-
-=======
+    @State var showQRSheet = false
+    @State var qrCode = ""
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
->>>>>>> origin/agza3:ScooterApp/DataModel/ReportView.swift
+    func submitNoPhotoText() -> String {
+        report.hasPhoto() ? "" : "\nTake a photo\n"
+    }
+    
+    func submitNoViolationText() -> String {
+        report.hasViolation() ? "" : "\nChoose the type of violation\n"
+    }
+    
     var body: some View {
         Form {
             Section (header: SectionHeaderText(text: "Take a photo", done: report.photo != nil, suffix: "(Required)")) {
@@ -25,7 +32,7 @@ struct ReportView: View {
                             report.setLocation()
                         }
                     })
-                        .frame(width: geometry.size.width, height: geometry.size.width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .frame(width: geometry.size.width, height: geometry.size.width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 })
                 .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
                 .listRowInsets(EdgeInsets())
@@ -33,9 +40,11 @@ struct ReportView: View {
             Text("Date: \(report.timestamp?.description ?? "No date set yet")")
             Text("Latitude: \(report.latitude ?? 0.0)")
             Text("Longitude: \(report.longitude ?? 0.0)")
+            Text("QR code: \(report.getQRcodeAsString())")
+            Text("Brand: \(report.getBrandAsString())")
             
             Section (header: SectionHeaderText(text: "Scan QR Code", done: report.hasQRcode(), suffix: "(Optional)")
-                        ) {
+            ) {
                 Group {
                     HStack {
                         Image(systemName: "barcode.viewfinder")
@@ -43,6 +52,18 @@ struct ReportView: View {
                         Text("Brand of the scooter: \(report.brand.rawValue)")
                     }
                 }
+                .sheet(isPresented: $showQRSheet) {
+                    ScannerView(qrCode: $qrCode, isPresented: $showQRSheet)
+                        .onDisappear(perform: {
+                            print("Got qrCode:", qrCode)
+                            if !qrCode.isEmpty {
+                                report.setQRCode(qrCode)
+                            }
+                        })
+                }
+            }
+            .onTapGesture {
+                showQRSheet = true
             }
             
             Section (header: SectionHeaderText(text: "Type of violation", done: report.misplaced || report.laying || report.broken || report.other, suffix: "(Required)")) {
@@ -54,36 +75,38 @@ struct ReportView: View {
             
             Section (header: SectionHeaderText(text: "Comment", done: !report.comment.isEmpty, suffix: "(Optional)")) {
                 // Old Solution without "DONE" button
-                TextField("Enter a comment", text: $report.comment)
-                                
-                // Custom solution:
-                //DoneTextField(placeholder: "Enter a comment", text: $report.comment, isfocusAble: false)
+                //TextField("Enter a comment", text: $report.comment)
+                
+                // Custom solution with "DONE" button:
+                DoneTextField(placeholder: "Enter a comment", text: $report.comment, isfocusAble: false)
                 
             }
             
-            Section {
+            Section(header: Text("Send Report")) {
                 Button("Submit", action: {
-                    ReportStore.singleton.uploadPhoto(image: report.photo!, name: report.photoFilename)
-                    ReportStore.singleton.uploadReport(report: report)
-                    //ReportStore.singleton.addReport(report: report)
+                    if report.checkIfSubmittable() {
+                        ReportStore.singleton.uploadPhoto(image: report.photo!, name: report.photoFilename)
+                        ReportStore.singleton.uploadReport(report: report)
+                        //ReportStore.singleton.addReport(report: report)
+                        self.mode.wrappedValue.dismiss()
+                    }
                     self.showAlert = true
-<<<<<<< HEAD:ScooterApp/CreatingReportScreen/ReportView.swift
-=======
-                    self.mode.wrappedValue.dismiss()
->>>>>>> origin/agza3:ScooterApp/DataModel/ReportView.swift
-                })//.disabled(!report.checkIfSubmittable())
+                })
                 .alert(isPresented: $showAlert) {
-                            Alert(
-                                title: Text("Thank you!"),
-                                message: Text("Your reports help us improve!")
+                    if report.checkIfSubmittable() {
+                        return Alert(
+                            title: Text("Thank you!"),
+                            message: Text("Your reports help us improve!")
+                        )} else {
+                            return Alert(
+                                title: Text("Missing information"),
+                                message: Text("\(submitNoPhotoText())\(submitNoViolationText())")
                             )
                         }
+                }
             }
         }
         .navigationBarTitle("Report")
-        //        .navigationBarItems(trailing:
-        //                                Button("Submit", action: {print("SUBMIT PRESSED")}).disabled(!report.checkIfSubmittable())
-        //        )
     }
 }
 

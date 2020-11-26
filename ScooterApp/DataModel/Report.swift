@@ -72,6 +72,8 @@ class Report: Identifiable, ObservableObject {
             self.latitude = lat
         } else {
             print("Error: Report.setLocation() could not find location:" + locationManager.statusString)
+            self.longitude = 0.0
+            self.latitude = 0.0
         }
     }
     
@@ -99,7 +101,7 @@ class Report: Identifiable, ObservableObject {
     func setBrand() {
         switch self.qrCode {
             case .url(let url):
-                if (url.contains("li.me")) {
+                if (url.contains("lime")) {
                     self.brand = .lime
                 } else if (url.contains("tier")) {
                     self.brand = .tier
@@ -121,10 +123,14 @@ class Report: Identifiable, ObservableObject {
         return self.brand.rawValue
     }
     
+    func hasViolation() -> Bool {
+        self.laying || self.broken || self.misplaced || self.other
+    }
+    
     func checkIfSubmittable() -> Bool {
         if self.user.isEmpty || self.photo == nil || self.timestamp == nil || self.longitude == nil || self.latitude == nil {
             return false // No vital info must be missing
-        } else if self.laying || self.broken || self.misplaced || self.other {
+        } else if hasViolation() {
             return true // One description must be selected
         }
         return false
