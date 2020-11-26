@@ -11,6 +11,10 @@ struct ReportView: View {
     @StateObject var report: Report
     @State var showAlert = false
 
+=======
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
+>>>>>>> origin/agza3:ScooterApp/DataModel/ReportView.swift
     var body: some View {
         Form {
             Section (header: SectionHeaderText(text: "Take a photo", done: report.photo != nil, suffix: "(Required)")) {
@@ -63,6 +67,10 @@ struct ReportView: View {
                     ReportStore.singleton.uploadReport(report: report)
                     //ReportStore.singleton.addReport(report: report)
                     self.showAlert = true
+<<<<<<< HEAD:ScooterApp/CreatingReportScreen/ReportView.swift
+=======
+                    self.mode.wrappedValue.dismiss()
+>>>>>>> origin/agza3:ScooterApp/DataModel/ReportView.swift
                 })//.disabled(!report.checkIfSubmittable())
                 .alert(isPresented: $showAlert) {
                             Alert(
