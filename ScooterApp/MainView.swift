@@ -12,7 +12,7 @@ struct MainView: View {
     
     @ObservedObject var locationManager = LocationManager.singleton
     @State private var lastUpdate = Date()
-    let minTimeIntervalBetweenUpdates: TimeInterval = 10.0 //In seconds
+    let minTimeIntervalBetweenUpdates: TimeInterval = 5.0 //In seconds
     @State var firstLoad = true
     
     func allowUpdate() -> Bool{
