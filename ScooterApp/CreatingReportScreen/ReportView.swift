@@ -151,7 +151,7 @@ struct ReportView: View {
 //                }.foregroundColor(.green)
         }
         .navigationBarTitle("Create Report")
-        //.navigationBarItems(trailing: SubmitReportButton(report: report))
+        .navigationBarItems(trailing: SubmitReportButton(report: report))
     }
 }
 

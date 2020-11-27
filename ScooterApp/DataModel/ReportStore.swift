@@ -214,7 +214,7 @@ class ReportStore{
     }
     
     func anyIntToBool (_ input: Any?) -> Bool {
-        return 1 != (input! as! Int)
+        return 1 == (input! as! Int)
     }
     
 }

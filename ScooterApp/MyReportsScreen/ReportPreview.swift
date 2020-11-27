@@ -49,6 +49,7 @@ struct ReportPreview: View {
                     ViolationLabel(text: "Other")
                 }
             }
+            
             Section (header: Text("Comment")) {
                 if report.comment.isEmpty {
                     Text("No comment").italic()
