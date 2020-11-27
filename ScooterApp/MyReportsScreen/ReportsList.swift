@@ -19,21 +19,30 @@ struct ReportsList: View {
             ForEach(ReportStore.singleton.getReportsListByDate()) { report in
                 NavigationLink(destination: ReportPreview(report: report, photo: getReportPhoto(report))) {
                     HStack() {
+                        Group{
                         Image(uiImage: self.getReportPhoto(report))
                             .resizable()
                             .aspectRatio(nil, contentMode: .fill)
                             .frame(width: 72, height: 72, alignment: .center)
                             .clipped()
                             .cornerRadius(8)
-                        
-                        VStack(){
-                            Text(
-                                formatDate(date: report.timestamp!))
-                                .lineLimit(2)
                         }
-                        Spacer()
-                    }
-                }
+                        VStack(){
+                            Spacer()
+                            Text(formatDate(date: report.timestamp!))
+                                .font(.headline)
+                                .lineLimit(1)
+                                .frame(alignment: .leading)
+                            Spacer()
+                            //Label(report.getAddressAsString(), systemImage: "location.fill").font(.footnote).lineLimit(2)
+                            Text(report.getAddressAsString())
+                                .font(.footnote)
+                                .lineLimit(1)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }.frame(alignment: .leading)
+                    }.frame(alignment: .leading)
+                }.buttonStyle(PlainButtonStyle())
             }
         }.navigationBarTitle("My reports", displayMode: .inline).onAppear(perform: {
             print()

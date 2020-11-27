@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,14 +21,9 @@
 		C09A9FFB2560466E00CA3194 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF12560466D00CA3194 /* Report.swift */; };
 		C09A9FFC2560466E00CA3194 /* ReportStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF22560466D00CA3194 /* ReportStore.swift */; };
 		C09A9FFD2560466E00CA3194 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF32560466E00CA3194 /* MapView.swift */; };
-		C09A9FFE2560466E00CA3194 /* TestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF42560466E00CA3194 /* TestingView.swift */; };
 		C09AA01525613EAA00CA3194 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09AA01425613EAA00CA3194 /* MainView.swift */; };
 		C09AE420256AC36600A76396 /* ReportPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09AE41F256AC36600A76396 /* ReportPreview.swift */; };
-		C09EB1F7256FB8BC00252807 /* QrCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09EB1F6256FB8BC00252807 /* QrCodeScannerView.swift */; };
-		C09EB1FD256FB90000252807 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09EB1FC256FB90000252807 /* CameraPreview.swift */; };
-		C09EB200256FB92500252807 /* QrCodeCameraDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09EB1FF256FB92500252807 /* QrCodeCameraDelegate.swift */; };
-		C09EB203256FB9FA00252807 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09EB202256FB9FA00252807 /* ScannerView.swift */; };
-		C09EB206256FBA1700252807 /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09EB205256FBA1700252807 /* ScannerViewModel.swift */; };
+		C09EB20F2570271C00252807 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = C09EB20E2570271C00252807 /* CodeScanner */; };
 		C0A773C425615B3C00A0532A /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A773C325615B3C00A0532A /* ReportView.swift */; };
 		C0C390EB2566A8A1008E08DB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C390EA2566A8A1008E08DB /* Coordinator.swift */; };
 		C0C390EF2566DD7E008E08DB /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */; };
@@ -54,14 +49,8 @@
 		C09A9FF12560466D00CA3194 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		C09A9FF22560466D00CA3194 /* ReportStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportStore.swift; sourceTree = "<group>"; };
 		C09A9FF32560466E00CA3194 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		C09A9FF42560466E00CA3194 /* TestingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingView.swift; sourceTree = "<group>"; };
 		C09AA01425613EAA00CA3194 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C09AE41F256AC36600A76396 /* ReportPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPreview.swift; sourceTree = "<group>"; };
-		C09EB1F6256FB8BC00252807 /* QrCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeScannerView.swift; sourceTree = "<group>"; };
-		C09EB1FC256FB90000252807 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
-		C09EB1FF256FB92500252807 /* QrCodeCameraDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeCameraDelegate.swift; sourceTree = "<group>"; };
-		C09EB202256FB9FA00252807 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
-		C09EB205256FBA1700252807 /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
 		C0A773C325615B3C00A0532A /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		C0C390EA2566A8A1008E08DB /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
@@ -75,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C09EB20F2570271C00252807 /* CodeScanner in Frameworks */,
 				E3D1FEF17EA3DF046B8DF10F /* Pods_ScooterApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,17 +110,15 @@
 		C030E8452560443C006D46DE /* ScooterApp */ = {
 			isa = PBXGroup;
 			children = (
-				C0F5E660256B0E090020D972 /* Extension+UIImage.swift */,
+				C09EB20B257021C400252807 /* Extensions */,
 				C030E8542560443D006D46DE /* Info.plist */,
 				C00E5681256A6ADB00EA9A81 /* GoogleService-Info.plist */,
 				C09AA004256138E900CA3194 /* DataModel */,
 				C09AA009256139FD00CA3194 /* CoreData */,
 				C09AA000256138A900CA3194 /* CameraScreen */,
 				C09AA002256138D700CA3194 /* MapScreen */,
-				C09AA0062561393400CA3194 /* Testing */,
 				C09AA01225613E3500CA3194 /* MyReportsScreen */,
 				C060B0582569562D00A0C720 /* CreatingReportScreen */,
-				C09EB1F9256FB8C100252807 /* QRScanner */,
 				C09AA01425613EAA00CA3194 /* MainView.swift */,
 				C030E8462560443C006D46DE /* ScooterApp.swift */,
 				C030E84A2560443D006D46DE /* Assets.xcassets */,
@@ -185,14 +173,6 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
-		C09AA0062561393400CA3194 /* Testing */ = {
-			isa = PBXGroup;
-			children = (
-				C09A9FF42560466E00CA3194 /* TestingView.swift */,
-			);
-			path = Testing;
-			sourceTree = "<group>";
-		};
 		C09AA009256139FD00CA3194 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,22 +185,18 @@
 		C09AA01225613E3500CA3194 /* MyReportsScreen */ = {
 			isa = PBXGroup;
 			children = (
-				C09A9FED2560466C00CA3194 /* ReportsList.swift */,
 				C09AE41F256AC36600A76396 /* ReportPreview.swift */,
+				C09A9FED2560466C00CA3194 /* ReportsList.swift */,
 			);
 			path = MyReportsScreen;
 			sourceTree = "<group>";
 		};
-		C09EB1F9256FB8C100252807 /* QRScanner */ = {
+		C09EB20B257021C400252807 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C09EB1F6256FB8BC00252807 /* QrCodeScannerView.swift */,
-				C09EB1FF256FB92500252807 /* QrCodeCameraDelegate.swift */,
-				C09EB1FC256FB90000252807 /* CameraPreview.swift */,
-				C09EB202256FB9FA00252807 /* ScannerView.swift */,
-				C09EB205256FBA1700252807 /* ScannerViewModel.swift */,
+				C0F5E660256B0E090020D972 /* Extension+UIImage.swift */,
 			);
-			path = QRScanner;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,6 +217,9 @@
 			dependencies = (
 			);
 			name = ScooterApp;
+			packageProductDependencies = (
+				C09EB20E2570271C00252807 /* CodeScanner */,
+			);
 			productName = ScooterApp;
 			productReference = C030E8432560443C006D46DE /* ScooterApp.app */;
 			productType = "com.apple.product-type.application";
@@ -268,6 +247,9 @@
 				Base,
 			);
 			mainGroup = C030E83A2560443C006D46DE;
+			packageReferences = (
+				C09EB20D2570271C00252807 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+			);
 			productRefGroup = C030E8442560443C006D46DE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -342,13 +324,8 @@
 				C0C390EB2566A8A1008E08DB /* Coordinator.swift in Sources */,
 				C09A9FFD2560466E00CA3194 /* MapView.swift in Sources */,
 				C0C390EF2566DD7E008E08DB /* CameraPickerView.swift in Sources */,
-				C09EB1FD256FB90000252807 /* CameraPreview.swift in Sources */,
 				C09A9FFB2560466E00CA3194 /* Report.swift in Sources */,
 				C0A773C425615B3C00A0532A /* ReportView.swift in Sources */,
-				C09A9FFE2560466E00CA3194 /* TestingView.swift in Sources */,
-				C09EB203256FB9FA00252807 /* ScannerView.swift in Sources */,
-				C09EB200256FB92500252807 /* QrCodeCameraDelegate.swift in Sources */,
-				C09EB206256FBA1700252807 /* ScannerViewModel.swift in Sources */,
 				C030E8492560443C006D46DE /* CoreDateExampleView.swift in Sources */,
 				C09A9FF62560466E00CA3194 /* GetPhotoView.swift in Sources */,
 				C030E8472560443C006D46DE /* ScooterApp.swift in Sources */,
@@ -359,7 +336,6 @@
 				C030E8532560443D006D46DE /* ScooterApp.xcdatamodeld in Sources */,
 				C0F5E661256B0E090020D972 /* Extension+UIImage.swift in Sources */,
 				C09A9FFA2560466E00CA3194 /* LocationManager.swift in Sources */,
-				C09EB1F7256FB8BC00252807 /* QrCodeScannerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +526,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C09EB20D2570271C00252807 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C09EB20E2570271C00252807 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C09EB20D2570271C00252807 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C030E8512560443D006D46DE /* ScooterApp.xcdatamodeld */ = {

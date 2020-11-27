@@ -14,7 +14,7 @@ struct ReportPreview: View {
     var body: some View {
         Form {
             
-            Section (header: Text("Photo")) {
+            Section (header: Text("Photo"), footer: AddressTextView(report: report)) {
                 GeometryReader(content: { geometry in
                     Image(uiImage: photo)
                         .resizable()
@@ -24,17 +24,13 @@ struct ReportPreview: View {
                 .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
                 .listRowInsets(EdgeInsets())
             }
-            Text("Date: \(report.timestamp?.description ?? "No date set yet")")
-            Text("Latitude: \(report.latitude ?? 0.0)")
-            Text("Longitude: \(report.longitude ?? 0.0)")
             
-            Section (header: SectionHeaderText(text: "Scan QR Code", done: report.hasQRcode(), suffix: "(Optional)")
-            ) {
+            Section (header: Text("Scooter QR code")) {
                 Group {
                     HStack {
                         Image(systemName: "barcode.viewfinder")
                         Divider()
-                        Text("Brand of the scooter: \(report.brand.rawValue)")
+                        Text("Scooter brand: \(report.brand.rawValue)")
                     }
                 }
             }
@@ -60,6 +56,16 @@ struct ReportPreview: View {
                     Text("\"\(report.comment)\"").italic()
                 }
             }
+            
+            // DEBUGGING
+//            Section(header: Text("DEBUGGING")) {
+//                Text("Date: \(report.timestamp?.description ?? "No date set yet")")
+//                Text("Latitude: \(report.latitude ?? 0.0)")
+//                Text("Longitude: \(report.longitude ?? 0.0)")
+//                Text("Address: \(report.getAddressAsString())")
+//                Text("QR code: \(report.getQRcodeAsString())")
+//                Text("Brand: \(report.getBrandAsString())")
+//            }.foregroundColor(.green)
         }
     }
 }

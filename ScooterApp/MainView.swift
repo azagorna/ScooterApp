@@ -11,28 +11,6 @@ import Foundation
 struct MainView: View {
     
     @ObservedObject var locationManager = LocationManager.singleton
-    @State private var lastUpdate = Date()
-    let minTimeIntervalBetweenUpdates: TimeInterval = 5.0 //In seconds
-    @State var firstLoad = true
-    
-    func allowUpdate() -> Bool{
-        if firstLoad || -lastUpdate.timeIntervalSinceNow >= minTimeIntervalBetweenUpdates  {
-            firstLoad = false
-            lastUpdate = Date() // If updating was allowed, reset lastUpdate time to now
-            return true
-        }
-        return false
-    }
-    
-    func updateDateFromFirebase() -> Void {
-        if (allowUpdate()) {
-        print("Getting data from Firebase")
-        ReportStore.singleton.downloadReports()
-        } else {
-            print("Dont fetch too often! Try again in \(String(format: "%.2f", -lastUpdate.timeIntervalSinceNow)) seconds")
-        }
-    }
-    
     
     var body: some View {
         NavigationView(content: {
@@ -63,7 +41,7 @@ struct MainView: View {
                             .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                     }
                 }.padding()
-            }.onAppear(perform: updateDateFromFirebase)
+            }.onAppear(perform: ReportStore.singleton.updateDateFromFirebase)
         })
     }
 }

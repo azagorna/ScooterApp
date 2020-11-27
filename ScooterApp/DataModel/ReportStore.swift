@@ -12,9 +12,14 @@ class ReportStore{
     let placeholder: UIImage = UIImage(named: "placeholder_missing_scooter")!
     
     //Firebase Stuff
+    let DEBUG_DISABLE_SUBMITTING = false
+    let DEBUG_DISABLE_DOWNLOADING = false
     let db = Firestore.firestore()
     let storage = Storage.storage()
     let storageRef: StorageReference
+    private var lastUpdate = Date()
+    private let minTimeIntervalBetweenUpdates: TimeInterval = 5.0 //In seconds
+    private var firstLoad = true
     
     private init() {
         //Firebase Stuff
@@ -26,6 +31,32 @@ class ReportStore{
 //        self.reports["test2"] = Report(id: "test2", user: "Tester", timestamp: Date().advanced(by: 100.0), longitude: 56.0, latitude: 12.0, qrCode: "", laying: false, broken: true, misplaced: false, other: true, comment: "Hello again")
 //        self.photos["test2.jpg"] = UIImage(named: "image_of_voi_scooter")
     }
+    
+    private func allowUpdate() -> Bool{
+        guard !DEBUG_DISABLE_DOWNLOADING else {
+            print("DEBUG_DISABLE_DOWNLOADING is", DEBUG_DISABLE_DOWNLOADING)
+            return false
+        }
+        
+        if firstLoad || -lastUpdate.timeIntervalSinceNow >= minTimeIntervalBetweenUpdates  {
+            firstLoad = false
+            lastUpdate = Date() // If updating was allowed, reset lastUpdate time to now
+            return true
+        }
+        return false
+    }
+    
+    func updateDateFromFirebase() -> Void {
+        if (allowUpdate()) {
+        print("Getting data from Firebase")
+        ReportStore.singleton.downloadReports()
+        } else {
+            print("Dont fetch too often! Try again in \(String(format: "%.2f", -lastUpdate.timeIntervalSinceNow)) seconds")
+        }
+    }
+    
+    
+    
     
     func getReportsListByDate() -> [Report] {
         return Array(self.reports.values).sorted(by: {$0.timestamp!.compare($1.timestamp!).rawValue == 1})
@@ -39,7 +70,42 @@ class ReportStore{
     }
     
     
-    func uploadPhoto(image: UIImage, name: String) {
+
+    
+    func uploadReport (report: Report) {
+        guard !DEBUG_DISABLE_SUBMITTING else {
+            print("DEBUG_DISABLE_SUBMITTING is", DEBUG_DISABLE_SUBMITTING)
+            return
+        }
+                
+        // Add a new document with a generated ID
+        db.collection("reports").addDocument(data: [
+            "id": report.id,
+            "user": report.user,
+            "photoFilename" : report.photoFilename,
+            "timestamp": Firebase.Date(timeIntervalSince1970: report.timestamp?.timeIntervalSince1970 ?? Date().timeIntervalSince1970),
+            "geolocation": Firebase.GeoPoint(latitude: report.latitude ?? 0.0, longitude: report.longitude ?? 0.0),
+            "address": report.getAddressAsString(),
+            "qrCode": report.getQRcodeAsString(),
+            "brand": report.getBrandAsString(),
+            "laying": report.laying,
+            "broken": report.broken,
+            "misplaced": report.misplaced,
+            "other": report.other,
+            "comment": report.comment
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Report added with id: \(report.id)")
+            }
+        }
+        
+        //Upload report photo
+        self.uploadPhoto(image: report.photo!, name: report.photoFilename)
+    }
+    
+    private func uploadPhoto(image: UIImage, name: String) {
         
         // Create a file name for the image to be uploaded
         let filename = name
@@ -63,30 +129,6 @@ class ReportStore{
                     // Uh-oh, an error occurred!
                     return
                 }
-            }
-        }
-    }
-    
-    func uploadReport (report: Report) {
-        // Add a new document with a generated ID
-        db.collection("reports").addDocument(data: [
-            "id": report.id,
-            "user": report.user,
-            "photoFilename" : report.photoFilename,
-            "timestamp": Firebase.Date(timeIntervalSince1970: report.timestamp?.timeIntervalSince1970 ?? Date().timeIntervalSince1970),
-            "geolocation": Firebase.GeoPoint(latitude: report.latitude ?? 0.0, longitude: report.longitude ?? 0.0),
-            "qrCode": report.getQRcodeAsString(),
-            "brand": report.getBrandAsString(),
-            "laying": report.laying,
-            "broken": report.broken,
-            "misplaced": report.misplaced,
-            "other": report.other,
-            "comment": report.comment
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Report added with id: \(report.id)")
             }
         }
     }
@@ -120,8 +162,6 @@ class ReportStore{
         }
     }
     
-    
-    
     func downloadReports() -> Void {
         
         // First we clear all old reports to avoid duplicates
@@ -146,6 +186,7 @@ class ReportStore{
                         let timestamp = (data["timestamp"] as! Timestamp).dateValue()
                         let longitude = (data["geolocation"] as! GeoPoint).longitude
                         let latitude = (data["geolocation"] as! GeoPoint).latitude
+                        let address: String = data["address"] as! String
                         let qrCode: String = data["qrCode"] as! String
                         //let brand: String = data["brand"] as! String
                         let laying: Bool = self.anyIntToBool(data["laying"])
@@ -154,7 +195,7 @@ class ReportStore{
                         let other: Bool = self.anyIntToBool(data["other"])
                         let comment: String = data["comment"] as! String
                                         
-                        let newReport = Report(id: id, user: user, timestamp: timestamp, longitude: longitude, latitude: latitude, qrCode: qrCode, laying: laying, broken: broken, misplaced: misplaced, other: other, comment: comment)
+                        let newReport = Report(id: id, user: user, timestamp: timestamp, longitude: longitude, latitude: latitude, address: address, qrCode: qrCode, laying: laying, broken: broken, misplaced: misplaced, other: other, comment: comment)
                         
                         print("Adding report with id: \(id)")
                         ReportStore.singleton.reports[id] = newReport
