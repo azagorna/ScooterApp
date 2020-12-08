@@ -1,10 +1,3 @@
-//
-//  ReportView.swift
-//  ScooterApp
-//
-//  Created by Gabriel Brodersen on 15/11/2020.
-//
-
 import SwiftUI
 import CodeScanner //Source: https://github.com/twostraws/CodeScanner (MIT License)
 
@@ -18,10 +11,9 @@ struct ReportView: View {
         Form {
             Section (header: SectionHeaderText(text: "Take a photo", done: report.photo != nil, suffix: "(Required)"), footer: AddressTextView(report: report)) {
                 GeometryReader(content: { geo in
-                    GetPhotoView(photo: $report.photo).ignoresSafeArea().onDisappear(perform: {
+                    GetPhotoView(photo: $report.photo).onDisappear(perform: {
                         if report.photo != nil {
-                            report.photo = report.photo?.squareCropImage() // Crop Photo
-                            report.photo = report.photo?.resizeImage(targetSize: CGSize(width: 512, height: 512)) // Scale Photo
+                            report.photoDownloadProgress = 1.0
                             report.setTimestamp()
                             report.setLocation()
                         }
@@ -81,9 +73,9 @@ struct ReportView: View {
                                         .shadow(radius: 3)
                                     HStack {
                                         VStack {
-                                            Button(action: {self.showQRSheet = false}, label: {
+                                            Button {self.showQRSheet = false} label: {
                                                 Label("Cancel", systemImage: "chevron.left").font(.headline)
-                                            }).padding()
+                                            }.padding()
                                             Spacer()
                                         }
                                         Spacer()
@@ -141,14 +133,14 @@ struct ReportView: View {
             }
             
             // DEBUGGING
-//                Section(header: Text("DEBUGGING")) {
-//                    Text("Date: \(report.timestamp?.description ?? "No date set yet")")
-//                    Text("Latitude: \(report.latitude ?? 0.0)")
-//                    Text("Longitude: \(report.longitude ?? 0.0)")
-//                    Text("Address: \(report.getAddressAsString())")
-//                    Text("QR code: \(report.getQRcodeAsString())")
-//                    Text("Brand: \(report.getBrandAsString())")
-//                }.foregroundColor(.green)
+            //                Section(header: Text("DEBUGGING")) {
+            //                    Text("Date: \(report.timestamp?.description ?? "No date set yet")")
+            //                    Text("Latitude: \(report.latitude ?? 0.0)")
+            //                    Text("Longitude: \(report.longitude ?? 0.0)")
+            //                    Text("Address: \(report.getAddressAsString())")
+            //                    Text("QR code: \(report.getQRcodeAsString())")
+            //                    Text("Brand: \(report.getBrandAsString())")
+            //                }.foregroundColor(.green)
         }
         .navigationBarTitle("Create Report")
         .navigationBarItems(trailing: SubmitReportButton(report: report))
@@ -207,30 +199,35 @@ struct SubmitReportButton: View {
     func submit() -> Void {
         if report.checkIfSubmittable() {
             ReportStore.singleton.uploadReport(report: report)
-            self.mode.wrappedValue.dismiss()
+            delayDismiss()
         }
         self.showAlert = true
     }
     
-    var body: some View {
-        Button("Submit", action: {
-            submit()
-        }).disabled(!report.checkIfSubmittable())
-        .onTapGesture(perform: {
-            submit()
-        })
-        .alert(isPresented: $showAlert) {
-            if report.checkIfSubmittable() {
-                return Alert(
-                    title: Text("Thank you!"),
-                    message: Text("Your reports help us improve!")
-                )} else {
-                    return Alert(
-                        title: Text("Missing information"),
-                        message: Text("\(submitNoPhotoText())\(submitNoViolationText())")
-                    )
-                }
+    private func delayDismiss() {
+        // Delay of 1.0 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.mode.wrappedValue.dismiss()
         }
+    }
+    
+    var body: some View {
+        Button("Submit") {submit()}
+            .font(.headline)
+            .disabled(!report.checkIfSubmittable())
+            .onTapGesture { submit() }
+            .alert(isPresented: $showAlert) {
+                if report.checkIfSubmittable() {
+                    return Alert(
+                        title: Text("Thank you!"),
+                        message: Text("Your reports help us improve!")
+                    )} else {
+                        return Alert(
+                            title: Text("Missing information"),
+                            message: Text("\(submitNoPhotoText())\(submitNoViolationText())")
+                        )
+                    }
+            }
     }
     
 }
@@ -265,13 +262,6 @@ struct TimerText: View {
         }
     }
 }
-
-
-//struct QRCodeFrameView_Preview: PreviewProvider {
-//    static var previews: some View {
-//        QRCodeFrameView().frame(width: 300, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//    }
-//}
 
 struct ReportView_Previews: PreviewProvider {
     static var previews: some View {

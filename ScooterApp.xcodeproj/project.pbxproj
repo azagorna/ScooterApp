@@ -15,6 +15,7 @@
 		C030E8502560443D006D46DE /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C030E84F2560443D006D46DE /* Persistence.swift */; };
 		C030E8532560443D006D46DE /* ScooterApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C030E8512560443D006D46DE /* ScooterApp.xcdatamodeld */; };
 		C060B05B2569565D00A0C720 /* DoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060B05A2569565D00A0C720 /* DoneTextField.swift */; };
+		C088BFF5257EFBDF00095398 /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C088BFF4257EFBDF00095398 /* CameraPickerView.swift */; };
 		C09A9FF62560466E00CA3194 /* GetPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FEC2560466B00CA3194 /* GetPhotoView.swift */; };
 		C09A9FF72560466E00CA3194 /* ReportsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FED2560466C00CA3194 /* ReportsList.swift */; };
 		C09A9FFA2560466E00CA3194 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09A9FF02560466D00CA3194 /* LocationManager.swift */; };
@@ -25,8 +26,6 @@
 		C09AE420256AC36600A76396 /* ReportPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09AE41F256AC36600A76396 /* ReportPreview.swift */; };
 		C09EB20F2570271C00252807 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = C09EB20E2570271C00252807 /* CodeScanner */; };
 		C0A773C425615B3C00A0532A /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A773C325615B3C00A0532A /* ReportView.swift */; };
-		C0C390EB2566A8A1008E08DB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C390EA2566A8A1008E08DB /* Coordinator.swift */; };
-		C0C390EF2566DD7E008E08DB /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */; };
 		C0F5E661256B0E090020D972 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F5E660256B0E090020D972 /* Extension+UIImage.swift */; };
 		E3D1FEF17EA3DF046B8DF10F /* Pods_ScooterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7572BBDC7EC9985CAD33AA4 /* Pods_ScooterApp.framework */; };
 /* End PBXBuildFile section */
@@ -43,6 +42,7 @@
 		C030E8522560443D006D46DE /* ScooterApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScooterApp.xcdatamodel; sourceTree = "<group>"; };
 		C030E8542560443D006D46DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C060B05A2569565D00A0C720 /* DoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneTextField.swift; sourceTree = "<group>"; };
+		C088BFF4257EFBDF00095398 /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
 		C09A9FEC2560466B00CA3194 /* GetPhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPhotoView.swift; sourceTree = "<group>"; };
 		C09A9FED2560466C00CA3194 /* ReportsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportsList.swift; sourceTree = "<group>"; };
 		C09A9FF02560466D00CA3194 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -52,8 +52,6 @@
 		C09AA01425613EAA00CA3194 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C09AE41F256AC36600A76396 /* ReportPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPreview.swift; sourceTree = "<group>"; };
 		C0A773C325615B3C00A0532A /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
-		C0C390EA2566A8A1008E08DB /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
 		C0F5E660256B0E090020D972 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		E7572BBDC7EC9985CAD33AA4 /* Pods_ScooterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScooterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC0180BCD075EC0C44F777D7 /* Pods-ScooterApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScooterApp.debug.xcconfig"; path = "Target Support Files/Pods-ScooterApp/Pods-ScooterApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -110,9 +108,9 @@
 		C030E8452560443C006D46DE /* ScooterApp */ = {
 			isa = PBXGroup;
 			children = (
-				C09EB20B257021C400252807 /* Extensions */,
 				C030E8542560443D006D46DE /* Info.plist */,
 				C00E5681256A6ADB00EA9A81 /* GoogleService-Info.plist */,
+				C09EB20B257021C400252807 /* Extensions */,
 				C09AA004256138E900CA3194 /* DataModel */,
 				C09AA009256139FD00CA3194 /* CoreData */,
 				C09AA000256138A900CA3194 /* CameraScreen */,
@@ -149,8 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				C09A9FEC2560466B00CA3194 /* GetPhotoView.swift */,
-				C0C390EA2566A8A1008E08DB /* Coordinator.swift */,
-				C0C390EE2566DD7E008E08DB /* CameraPickerView.swift */,
+				C088BFF4257EFBDF00095398 /* CameraPickerView.swift */,
 			);
 			name = CameraScreen;
 			sourceTree = "<group>";
@@ -321,9 +318,8 @@
 			files = (
 				C030E8502560443D006D46DE /* Persistence.swift in Sources */,
 				C09AA01525613EAA00CA3194 /* MainView.swift in Sources */,
-				C0C390EB2566A8A1008E08DB /* Coordinator.swift in Sources */,
 				C09A9FFD2560466E00CA3194 /* MapView.swift in Sources */,
-				C0C390EF2566DD7E008E08DB /* CameraPickerView.swift in Sources */,
+				C088BFF5257EFBDF00095398 /* CameraPickerView.swift in Sources */,
 				C09A9FFB2560466E00CA3194 /* Report.swift in Sources */,
 				C0A773C425615B3C00A0532A /* ReportView.swift in Sources */,
 				C030E8492560443C006D46DE /* CoreDateExampleView.swift in Sources */,

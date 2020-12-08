@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct ReportsList: View {
-        
+    
+    @ObservedObject var reportStore: ReportStore
+    
     func formatDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US")
@@ -10,23 +12,12 @@ struct ReportsList: View {
         return dateFormatter.string(from: date)
     }
     
-    func getReportPhoto(_ report: Report) -> UIImage {
-        return ReportStore.singleton.findPhoto(filename: report.photoFilename)
-    }
-    
     var body: some View {
-        List{
-            ForEach(ReportStore.singleton.getReportsListByDate()) { report in
-                NavigationLink(destination: ReportPreview(report: report, photo: getReportPhoto(report))) {
+        List {
+            ForEach(self.reportStore.reportsList) { report in
+                NavigationLink(destination: ReportPreview(report: report)) {
                     HStack() {
-                        Group{
-                        Image(uiImage: self.getReportPhoto(report))
-                            .resizable()
-                            .aspectRatio(nil, contentMode: .fill)
-                            .frame(width: 72, height: 72, alignment: .center)
-                            .clipped()
-                            .cornerRadius(8)
-                        }
+                        ReportImageListThumbnail(report: report)
                         VStack(){
                             Spacer()
                             Text(formatDate(date: report.timestamp!))
@@ -34,7 +25,6 @@ struct ReportsList: View {
                                 .lineLimit(1)
                                 .frame(alignment: .leading)
                             Spacer()
-                            //Label(report.getAddressAsString(), systemImage: "location.fill").font(.footnote).lineLimit(2)
                             Text(report.getAddressAsString())
                                 .font(.footnote)
                                 .lineLimit(1)
@@ -43,23 +33,49 @@ struct ReportsList: View {
                         }.frame(alignment: .leading)
                     }.frame(alignment: .leading)
                 }.buttonStyle(PlainButtonStyle())
-            }
-        }.navigationBarTitle("My reports", displayMode: .inline).onAppear(perform: {
-            print()
-            print("Reports:")
-            print(ReportStore.singleton.reports.debugDescription)
-            print()
-            print("Photos:")
-            print(ReportStore.singleton.photos.debugDescription)
-            print()
-        })
+                
+            }.onDelete(perform: { indexSet in
+                indexSet.forEach { index in
+                    if reportStore.reportsList.indices.contains(index) {
+                        reportStore.deleteReport(report: reportStore.reportsList[index])
+                    }
+                }
+            })
+        }.navigationBarTitle("Reports", displayMode: .inline)
+        
     }
 }
 
 struct ReportsScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView(content: {
-        ReportsList()
-        })
+        Group {
+            NavigationView(content: {
+                ReportsList(reportStore: ReportStore.singleton)
+            })
+            NavigationView(content: {
+                ReportsList(reportStore: ReportStore.singleton)
+            })
+        }
+    }
+}
+
+struct ReportImageListThumbnail: View {
+    
+    @ObservedObject var report: Report
+    
+    var body: some View {
+        ZStack {
+            if report.hasPhoto() {
+                Image(uiImage: (report.photo ?? UIImage(systemName: "questionmark")!))
+                    .resizable()
+                    .aspectRatio(nil, contentMode: .fill)
+                    .frame(width: 72, height: 72, alignment: .center)
+                    .clipped()
+                    .cornerRadius(8.0)
+            }
+            if !report.hasPhoto() {
+                ProgressView().cornerRadius(8.0)
+            }
+        }.frame(width: 72, height: 72, alignment: .center)
     }
 }

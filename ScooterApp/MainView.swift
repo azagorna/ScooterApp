@@ -19,8 +19,9 @@ struct MainView: View {
                 MapView().ignoresSafeArea()
                 VStack {
                     HStack(alignment: .center) {
-                        NavigationLink(destination: ReportsList()) {
+                        NavigationLink(destination: ReportsList(reportStore: ReportStore.singleton)) {
                             Label("Reports", systemImage: "photo.on.rectangle.angled")
+                                .font(.system(size: 16, weight: .semibold, design: .rounded))
                                 .padding()
                                 .background(Color.accentColor)
                                 .foregroundColor(.white)
@@ -32,17 +33,18 @@ struct MainView: View {
                     }
                     Spacer()
                     NavigationLink(destination: ReportView(report: Report())) {
-                        Image(systemName: "plus")
+                        Text("Create Report")
+                            .font(.system(size: 20, weight: .semibold, design: .rounded))
+                            .padding(.horizontal, 10)
                             .padding()
                             .background(Color.accentColor)
                             .foregroundColor(.white)
-                            .font(.largeTitle)
                             .cornerRadius(999)
                             .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                     }
                 }.padding()
             }.onAppear(perform: ReportStore.singleton.updateDateFromFirebase)
-        })
+        })//.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

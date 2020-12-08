@@ -34,8 +34,14 @@ struct GetPhotoView: View {
         }
         .background(Color.black)
         .sheet(isPresented: $isImagePickerDisplay) {
-            CameraPickerView(selectedImage: $photo, sourceType: sourceType).ignoresSafeArea()
-        }.ignoresSafeArea()
+            CameraPickerView(sourceType: sourceType) {
+                image in
+                let cropped = image.squareCropImage()
+                let resized = cropped.resizeImage(targetSize: CGSize(width: 1024, height: 1024))
+                self.photo = resized
+            }
+            .ignoresSafeArea()
+        }//.ignoresSafeArea()
     }
 }
 

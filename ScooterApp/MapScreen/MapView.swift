@@ -21,7 +21,41 @@ struct MapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
+         
+        for report in ReportStore.singleton.reportsList {
+            
+            let location = CLLocationCoordinate2D(latitude: report.latitude!,
+                                                  longitude: report.longitude!)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = location
+            annotation.title = report.getDayAsString() ?? "N/A"
+            annotation.subtitle = "Time: \(report.getTimeAsString() ?? "N/A")"
+            uiView.addAnnotation(annotation)
+        }
     }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+
+        if !(annotation is MKPointAnnotation) {
+            return nil
+        }
+
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "demo")
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "demo")
+            annotationView!.canShowCallout = true
+        }
+        else {
+            annotationView!.annotation = annotation
+        }
+
+        annotationView!.image = UIImage(named: "image")
+
+        return annotationView
+
+    }
+    
 }
 
 struct MapView_Previews: PreviewProvider {

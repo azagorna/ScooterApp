@@ -8,18 +8,26 @@
 import SwiftUI
 
 struct ReportPreview: View {
-    let report: Report
-    let photo: UIImage
+    @ObservedObject var report: Report
+    @Environment(\.presentationMode) var presentationMode
+    @State private var showActionSheet = false
     
     var body: some View {
         Form {
-            
             Section (header: Text("Photo"), footer: AddressTextView(report: report)) {
                 GeometryReader(content: { geometry in
-                    Image(uiImage: photo)
-                        .resizable()
-                        .aspectRatio(nil, contentMode: .fill)
-                        .frame(width: geometry.size.width, height: geometry.size.width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    ZStack(alignment: Alignment(horizontal: .center, vertical: .center)) {
+                        if report.hasPhoto() {
+                            Image(uiImage: (report.photo ?? UIImage(systemName: "questionmark")!))
+                                .resizable()
+                                .aspectRatio(nil, contentMode: .fill)
+                                .frame(width: geometry.size.width, height: geometry.size.width, alignment: .center)
+                                .clipped()
+                        }
+                        if !report.hasPhoto() {
+                            ProgressView("Loading photo \(Int(report.photoDownloadProgress * 100))%", value: report.photoDownloadProgress).padding(100).frame(width: geometry.size.width, height: geometry.size.width, alignment: .center)
+                        }
+                    }
                 })
                 .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
                 .listRowInsets(EdgeInsets())
@@ -57,16 +65,27 @@ struct ReportPreview: View {
                     Text("\"\(report.comment)\"").italic()
                 }
             }
-            
+            Section (header: Text("Delete Report")) {
+                Button(action: { self.showActionSheet = true }) {
+                    Label("Delete", systemImage: "trash").font(.headline).foregroundColor(.red)
+                }.actionSheet(isPresented: $showActionSheet) {
+                    ActionSheet(title: Text("Warning!"), message: Text("Are you sure you want to delete this report?"),
+                                buttons: [.cancel(), .destructive(Text("Delete")) {
+                                    print("Deleted!")
+                                    self.presentationMode.wrappedValue.dismiss()
+                                    ReportStore.singleton.deleteReport(report: report)
+                                }])
+                }
+            }
             // DEBUGGING
-//            Section(header: Text("DEBUGGING")) {
-//                Text("Date: \(report.timestamp?.description ?? "No date set yet")")
-//                Text("Latitude: \(report.latitude ?? 0.0)")
-//                Text("Longitude: \(report.longitude ?? 0.0)")
-//                Text("Address: \(report.getAddressAsString())")
-//                Text("QR code: \(report.getQRcodeAsString())")
-//                Text("Brand: \(report.getBrandAsString())")
-//            }.foregroundColor(.green)
+            //            Section(header: Text("DEBUGGING")) {
+            //                Text("Date: \(report.timestamp?.description ?? "No date set yet")")
+            //                Text("Latitude: \(report.latitude ?? 0.0)")
+            //                Text("Longitude: \(report.longitude ?? 0.0)")
+            //                Text("Address: \(report.getAddressAsString())")
+            //                Text("QR code: \(report.getQRcodeAsString())")
+            //                Text("Brand: \(report.getBrandAsString())")
+            //            }.foregroundColor(.green)
         }
     }
 }
@@ -84,6 +103,6 @@ struct ViolationLabel: View {
 
 struct ReportPreview_Previews: PreviewProvider {
     static var previews: some View {
-        ReportPreview(report: Report(), photo: UIImage(named: "placeholder_missing_scooter")!)
+        ReportPreview(report: Report())
     }
 }

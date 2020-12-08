@@ -1,6 +1,7 @@
 
 import Foundation
 import SwiftUI
+import MapKit
 import CoreLocation
 
 //- `Hashable`
@@ -12,6 +13,7 @@ import CoreLocation
 
 enum ReportErrors: Error {
     case cantFindLocation(String)
+    case cantFindAddress(String)
     case unknownError
 }
 
@@ -22,10 +24,12 @@ extension Report: Hashable {
 
 class Report: Identifiable, ObservableObject {
     private let locationManager = LocationManager.singleton
+    private var dateFormatter = DateFormatter()
     let id: String
     var photoFilename: String { get {self.id + ".jpg"} }
     let user: String //Not used for now
     @Published var photo: UIImage?
+    @Published var photoDownloadProgress = 0.0
     @Published var timestamp: Date? //Set when taking photo
     @Published var longitude: Double?
     @Published var latitude: Double?
@@ -197,6 +201,41 @@ class Report: Identifiable, ObservableObject {
     
     func getBrandAsString() -> String {
         return self.brand.rawValue
+    }
+    
+    func getViolationAsString() -> String {
+        var violations = [String]()
+        if laying {
+            violations.append("Laying")
+        }
+        if broken {
+            violations.append("Broken")
+        }
+        if misplaced {
+            violations.append("Misplaced")
+        }
+        if other {
+            violations.append("Other")
+        }
+        return violations.joined(separator: ", ")
+    }
+    
+    func getDayAsString() -> String? {
+        self.dateFormatter.dateStyle = .medium
+        self.dateFormatter.timeStyle = .none
+        if let date = self.timestamp {
+            return dateFormatter.string(from: date)
+        }
+        return nil
+    }
+    
+    func getTimeAsString() -> String? {
+        self.dateFormatter.dateStyle = .none
+        self.dateFormatter.timeStyle = .short
+        if let date = self.timestamp {
+            return dateFormatter.string(from: date)
+        }
+        return nil
     }
     
     func hasViolation() -> Bool {
