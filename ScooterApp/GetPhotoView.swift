@@ -1,10 +1,11 @@
 import SwiftUI
+import AVKit
 
 struct GetPhotoView: View {
     
-    @Binding var photo: UIImage?
+    @ObservedObject var report: Report
     @State private var sourceType: UIImagePickerController.SourceType = .camera
-    @State private var isImagePickerDisplay = false
+    @Binding var showCameraSheet: Bool
     
     var body: some View {
         GeometryReader { geo in
@@ -15,38 +16,41 @@ struct GetPhotoView: View {
                     //...then use it to take a photo
                     Button(action: {
                         sourceType = .camera
-                        isImagePickerDisplay.toggle()
+                        showCameraSheet.toggle()
                     }) {
-                        GetPhotoButtonContentView(image: $photo)
+                        GetPhotoButtonContentView(image: self.report.photo)
                             .frame(width: squareSize, height: squareSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     }
                 } else {
                     //...else pick from camera roll
                     Button(action: {
                         sourceType = .photoLibrary
-                        isImagePickerDisplay.toggle()
+                        showCameraSheet.toggle()
                     }) {
-                        GetPhotoButtonContentView(image: $photo)
+                        GetPhotoButtonContentView(image: self.report.photo)
                             .frame(width: squareSize, height: squareSize, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     }
                 }
             }
         }
         .background(Color.black)
-        .sheet(isPresented: $isImagePickerDisplay) {
-            CameraPickerView(sourceType: sourceType) {
-                image in
-                let cropped = image.squareCropImage()
-                let resized = cropped.resizeImage(targetSize: CGSize(width: 1024, height: 1024))
-                self.photo = resized
-            }
-            .ignoresSafeArea()
-        }//.ignoresSafeArea()
+        .sheet(isPresented: $showCameraSheet) {
+            CameraPickerView(sourceType: sourceType) { self.report.photo = $0 }
+                .ignoresSafeArea(.all, edges: .all)
+                .onDisappear(perform: {
+                    if self.report.photo != nil {
+                        self.report.processPhoto()
+                        self.report.photoDownloadProgress = 1.0
+                        self.report.setTimestamp()
+                        self.report.setLocation()
+                    }
+                })
+        }
     }
 }
 
 struct GetPhotoButtonContentView: View {
-    @Binding var image: UIImage?
+    var image: UIImage?
     
     var body: some View {
         if image != nil {
@@ -72,10 +76,11 @@ struct GetPhotoButtonContentView: View {
     }
 }
 
+
 struct GetPhotoView_Preview: PreviewProvider {
-    @State static var preview_photo: UIImage? = nil
+    @State static var showCameraSheet: Bool = false
     
     static var previews: some View {
-        GetPhotoView(photo: $preview_photo)
+        GetPhotoView(report: Report(), showCameraSheet: $showCameraSheet)
     }
 }

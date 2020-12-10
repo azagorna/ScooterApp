@@ -1,3 +1,6 @@
+// Getting location without ViewControllers:
+// Source: https://stackoverflow.com/questions/57681885/how-to-get-current-location-using-swiftui-without-viewcontrollers
+
 import Foundation
 import CoreLocation
 import Combine

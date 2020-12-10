@@ -1,6 +1,7 @@
 // Source: https://github.com/ralfebert/ImagePickerView
 
 import SwiftUI
+import AVKit
 
 public struct CameraPickerView: UIViewControllerRepresentable {
 

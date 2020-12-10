@@ -3,6 +3,7 @@ import CodeScanner //Source: https://github.com/twostraws/CodeScanner (MIT Licen
 
 struct ReportView: View {
     @StateObject var report: Report
+    @State var showCameraSheet = false
     @State var showQRSheet = false
     @State var qrCode = ""
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -11,14 +12,9 @@ struct ReportView: View {
         Form {
             Section (header: SectionHeaderText(text: "Take a photo", done: report.photo != nil, suffix: "(Required)"), footer: AddressTextView(report: report)) {
                 GeometryReader(content: { geo in
-                    GetPhotoView(photo: $report.photo).onDisappear(perform: {
-                        if report.photo != nil {
-                            report.photoDownloadProgress = 1.0
-                            report.setTimestamp()
-                            report.setLocation()
-                        }
-                    })
-                    .frame(width: geo.size.width, height: geo.size.width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    GetPhotoView(report: report, showCameraSheet: $showCameraSheet)
+                        
+                        .frame(width: geo.size.width, height: geo.size.width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 })
                 .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
                 .listRowInsets(EdgeInsets())
@@ -26,22 +22,18 @@ struct ReportView: View {
             
             Section (header: SectionHeaderText(text: "Scan QR Code", done: report.hasQRcode(), suffix: "(Optional)")
             ) {
-                Group {
-                    HStack {
-                        Image(systemName: "barcode.viewfinder")
-                        Divider()
-                        switch report.brand {
-                            case .none:
-                                Text("Click to scan")
-                            case .unknown:
-                                Text("Found: \(report.getBrandAsString())")
-                            default:
-                                Text("Scooter brand: \(report.brand.rawValue)")
-                        }
-                        
+                HStack {
+                    Image(systemName: "barcode.viewfinder")
+                    Divider()
+                    switch report.brand {
+                        case .none:
+                            Text("Click to scan")
+                        case .unknown:
+                            Text("Found: \(report.getBrandAsString())")
+                        default:
+                            Text("Scooter brand: \(report.brand.rawValue)")
                     }
-                }
-                .sheet(isPresented: $showQRSheet) {
+                }.sheet(isPresented: $showQRSheet) {
                     
                     ZStack {
                         
@@ -108,28 +100,26 @@ struct ReportView: View {
                     
                 }
             }
-            .onTapGesture {
-                self.showQRSheet = true
-            }
+            .onTapGesture { showQRSheet = true }
             
             Section (header: SectionHeaderText(text: "Type of violation", done: report.misplaced || report.laying || report.broken || report.other, suffix: "(Required)")) {
-                Toggle("Is Misplaced", isOn: $report.misplaced)
-                Toggle("Is Laying", isOn: $report.laying)
-                Toggle("Is Broken", isOn: $report.broken)
+                Toggle("Is misplaced", isOn: $report.misplaced)
+                Toggle("Is laying", isOn: $report.laying)
+                Toggle("Is broken", isOn: $report.broken)
                 Toggle("Other", isOn: $report.other)
             }
             
             Section (header: SectionHeaderText(text: "Comment", done: !report.comment.isEmpty, suffix: "(Optional)")) {
                 // Old Solution without "DONE" button
-                //TextField("Enter a comment", text: $report.comment)
+                // TextField("Enter a comment", text: $report.comment)
                 
                 // Custom solution with "DONE" button:
                 DoneTextField(placeholder: "Enter a comment", text: $report.comment, isfocusAble: false)
-                
             }
             
             Section(header: Text("Send Report")) {
                 SubmitReportButton(report: report)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
             
             // DEBUGGING

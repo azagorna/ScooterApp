@@ -1,51 +1,33 @@
+// Sources for cropToSquare: https://gist.github.com/axldyb/9839c003e77701d1e7d1
+// Sources for resizeImage: https://stackoverflow.com/questions/2658738/the-simplest-way-to-resize-an-uiimage
+
 import SwiftUI
 import UIKit
 
-
 extension UIImage {
-
-    func squareCropImage() -> UIImage {
-        let width: CGFloat  = self.size.width
-        let height: CGFloat = self.size.height
-        var x: CGFloat = 0.0
-        var y: CGFloat = 0.0
-        var newlength: CGFloat = 0.0
-                
-        if (width > height) { // if landscape
-            newlength = height
-            x = (width - newlength) / 2.0
-            y = 0.0
-        } else if (height > width) { // if portrait
-            newlength = width
-            x = 0.0
-            y = (height - width) / 2.0
-        } else { // else already square
-            newlength = width
-        }
+    
+    func cropToSquare() -> UIImage {
+        let refWidth = CGFloat((self.cgImage!.width))
+        let refHeight = CGFloat((self.cgImage!.height))
+        let cropSize = refWidth > refHeight ? refHeight : refWidth
         
-        let cropSquare = CGRect(x: x, y: y, width: newlength, height: newlength)
-        let imageRef = self.cgImage!.cropping(to: cropSquare);
-        return UIImage(cgImage: imageRef!, scale: UIScreen.main.scale, orientation: self.imageOrientation)
+        let x = (refWidth - cropSize) / 2.0
+        let y = (refHeight - cropSize) / 2.0
+        
+        let cropRect = CGRect(x: x, y: y, width: cropSize, height: cropSize)
+        let imageRef = self.cgImage?.cropping(to: cropRect)
+        let cropped = UIImage(cgImage: imageRef!, scale: 0.0, orientation: self.imageOrientation)
+        
+        return cropped
     }
     
-    func resizeImage(targetSize: CGSize) -> UIImage {
-        let size = self.size
-        let widthRatio  = targetSize.width  / self.size.width
-        let heightRatio = targetSize.height / self.size.height
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+    func resizeImage(newSize: CGSize) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: newSize)
+        let image = renderer.image { _ in
+            self.draw(in: CGRect.init(origin: CGPoint.zero, size: newSize))
         }
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        self.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
+        
+        return image.withRenderingMode(self.renderingMode)
     }
+    
 }

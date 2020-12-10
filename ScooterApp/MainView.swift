@@ -1,22 +1,23 @@
-//
-//  MainView.swift
-//  ScooterApp
-//
-//  Created by Gabriel Brodersen on 05/11/2020.
-//
-
 import SwiftUI
+import MapKit
 import Foundation
+
 
 struct MainView: View {
     
     @ObservedObject var locationManager = LocationManager.singleton
+    @ObservedObject var reportStore = ReportStore.singleton
+    
+    //@ObservedObject private var locations: [MKPointAnnotation] = ReportStore.reportsList as [MKPointAnnotation]
+    
+    @State private var selectedPlace: MKPointAnnotation?
+    @State private var selectedReport: Report? = nil
+    @State private var showReport: Bool = false
     
     var body: some View {
         NavigationView(content: {
-            
             ZStack {
-                MapView().ignoresSafeArea()
+                MapView(reportStore: reportStore, selectedReport: $selectedReport, showReport: $showReport).edgesIgnoringSafeArea(.all).disabled(showReport)
                 VStack {
                     HStack(alignment: .center) {
                         NavigationLink(destination: ReportsList(reportStore: ReportStore.singleton)) {
@@ -44,7 +45,22 @@ struct MainView: View {
                     }
                 }.padding()
             }.onAppear(perform: ReportStore.singleton.updateDateFromFirebase)
-        })//.navigationViewStyle(StackNavigationViewStyle())
+        }).sheet(isPresented: $showReport) {
+            VStack(alignment: .center, spacing: 10) {
+                ReportPreview(report: selectedReport!)
+            }.navigationBarTitle("Bar Title", displayMode: .inline).navigationBarItems(trailing: Button("Done",
+                                                                                                        action: {}))
+        }
+        //                .toolbar {
+        //                    ToolbarItem(placement: .primaryAction) {
+        //                        Button(action: {
+        //                            self.showReport = false
+        //                        }) {
+        //                            Text("Back").fontWeight(.semibold)
+        //                        }
+        //                    }
+        //                }
+        //        }
     }
 }
 

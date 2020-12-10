@@ -17,17 +17,18 @@ enum ReportErrors: Error {
     case unknownError
 }
 
-extension Report: Hashable {
-    static func == (lhs: Report, rhs: Report) -> Bool { lhs.id == rhs.id } // Equatable
-    func hash(into hasher: inout Hasher) { hasher.combine(self.id) }
-}
-
-class Report: Identifiable, ObservableObject {
+class Report: NSObject, ObservableObject, Identifiable, MKAnnotation {
+    
+    //MKAnnotation required properties:
+    var title: String? {getDayAsString() ?? "No day title"}
+    var subtitle: String? {"Time: \(getTimeAsString() ?? "No time title")"}
+    var coordinate: CLLocationCoordinate2D {CLLocationCoordinate2D(latitude: latitude ?? 0.0, longitude: longitude ?? 0.0)}
+    
     private let locationManager = LocationManager.singleton
     private var dateFormatter = DateFormatter()
-    let id: String
+    var id: String = UUID().uuidString
     var photoFilename: String { get {self.id + ".jpg"} }
-    let user: String //Not used for now
+    var user: String = "Default" //Not used for now
     @Published var photo: UIImage?
     @Published var photoDownloadProgress = 0.0
     @Published var timestamp: Date? //Set when taking photo
@@ -42,14 +43,14 @@ class Report: Identifiable, ObservableObject {
     @Published var other = false
     @Published var comment = ""
     
-    init() {
-        self.user = "Default"
-        self.id = UUID().uuidString
+    override init() {
+        super.init()
     }
     
-    init(id: String, user: String, timestamp : Date, longitude: Double, latitude: Double, address: String, qrCode: String, laying: Bool, broken: Bool, misplaced: Bool, other: Bool, comment: String){
-        self.id = id
+    convenience init(id: String, user: String, timestamp : Date, longitude: Double, latitude: Double, address: String, qrCode: String, laying: Bool, broken: Bool, misplaced: Bool, other: Bool, comment: String){
+        self.init()
         self.user = user
+        self.id = id
         self.photo = nil
         self.timestamp = timestamp
         self.longitude = longitude
@@ -61,6 +62,33 @@ class Report: Identifiable, ObservableObject {
         self.misplaced = misplaced
         self.other = other
         self.comment = comment
+    }
+    
+    func processPhoto() {
+        guard let newPhoto = self.photo else {
+            return
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).sync { [weak self] in
+            guard let self = self else {
+                return
+            }
+            print("photo taken", newPhoto.debugDescription)
+            
+            let cropped = newPhoto.cropToSquare()
+            print("photo cropped", cropped.debugDescription)
+            
+            let resized = cropped.resizeImage(newSize: CGSize(width: 512, height: 512))
+            print("photo resized", resized.debugDescription)
+            
+            DispatchQueue.main.async { [weak self] in
+                guard ((self?.photo = resized) != nil) else {
+                    print("processPhoto() failed to save photo")
+                    return
+                }
+                print("Photo was processed!")
+            }
+        }
     }
     
     func hasPhoto() -> Bool {
@@ -100,26 +128,26 @@ class Report: Identifiable, ObservableObject {
                             
                             // Combine address pieces to string, seperated by commas
                             self.setAddress(addressDescriptions.joined(separator: ", "))
-  
+                            
                             // Uncomment to check various address outputs
-//                            for place in validPlaces {
-//                                print("place:",place)
-//                                print("place.administrativeArea:", place.administrativeArea ?? "N/A")
-//                                print("place.areasOfInterest:", place.areasOfInterest ?? "N/A")
-//                                print("place.country:", place.country ?? "N/A")
-//                                print("place.inlandWater:", place.inlandWater ?? "N/A")
-//                                print("place.isoCountryCode:", place.isoCountryCode ?? "N/A")
-//                                print("place.locality:", place.locality ?? "N/A")
-//                                print("place.location:", place.location ?? "N/A")
-//                                print("place.name:", place.name ?? "N/A")
-//                                print("place.ocean:", place.ocean ?? "N/A")
-//                                print("place.postalCode:", place.postalCode ?? "N/A")
-//                                print("place.region:", place.region ?? "N/A")
-//                                print("place.subAdministrativeArea:", place.subAdministrativeArea ?? "N/A")
-//                                print("place.subLocality:", place.subLocality ?? "N/A")
-//                                print("place.subThoroughfare:", place.subThoroughfare ?? "N/A")
-//                                print("place.timeZone:", place.timeZone ?? "N/A")
-//                            }
+                            //                            for place in validPlaces {
+                            //                                print("place:",place)
+                            //                                print("place.administrativeArea:", place.administrativeArea ?? "N/A")
+                            //                                print("place.areasOfInterest:", place.areasOfInterest ?? "N/A")
+                            //                                print("place.country:", place.country ?? "N/A")
+                            //                                print("place.inlandWater:", place.inlandWater ?? "N/A")
+                            //                                print("place.isoCountryCode:", place.isoCountryCode ?? "N/A")
+                            //                                print("place.locality:", place.locality ?? "N/A")
+                            //                                print("place.location:", place.location ?? "N/A")
+                            //                                print("place.name:", place.name ?? "N/A")
+                            //                                print("place.ocean:", place.ocean ?? "N/A")
+                            //                                print("place.postalCode:", place.postalCode ?? "N/A")
+                            //                                print("place.region:", place.region ?? "N/A")
+                            //                                print("place.subAdministrativeArea:", place.subAdministrativeArea ?? "N/A")
+                            //                                print("place.subLocality:", place.subLocality ?? "N/A")
+                            //                                print("place.subThoroughfare:", place.subThoroughfare ?? "N/A")
+                            //                                print("place.timeZone:", place.timeZone ?? "N/A")
+                            //                            }
                         } else {
                             self.setAddress("Couldn't find address")
                         }

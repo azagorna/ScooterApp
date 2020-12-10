@@ -23,6 +23,12 @@ class ReportStore: ObservableObject{
     private let minTimeIntervalBetweenUpdates: TimeInterval = 5.0 //In seconds
     private var firstLoad = true
     
+    // Dispatch
+    private let concurrentUploadReportQueue =
+        DispatchQueue(label: "uploadReportQueue", qos: .utility)
+    private let concurrentUploadReportPhotoQueue =
+        DispatchQueue(label: "uploadReportPhotoQueue", qos: .utility)
+    
     deinit {
         print("ReportStore was deinitialized!")
     }
@@ -71,6 +77,11 @@ class ReportStore: ObservableObject{
             return
         }
         
+        guard report.photo != nil else {
+            print("Error in uploadReport()! Report does not have a photo")
+            return
+        }
+        
         // Add report offline:
         self.reports[report.id] = report
         self.reportsList.append(report)
@@ -78,30 +89,46 @@ class ReportStore: ObservableObject{
         
         // Add report to Firebase:
         // Add a new document with a generated ID
-        db.collection("reports").document(report.id).setData([
-            "id": report.id,
-            "user": report.user,
-            "photoFilename" : report.photoFilename,
-            "timestamp": Firebase.Date(timeIntervalSince1970: report.timestamp?.timeIntervalSince1970 ?? Date().timeIntervalSince1970),
-            "geolocation": Firebase.GeoPoint(latitude: report.latitude ?? 0.0, longitude: report.longitude ?? 0.0),
-            "address": report.getAddressAsString(),
-            "qrCode": report.getQRcodeAsString(),
-            "brand": report.getBrandAsString(),
-            "laying": report.laying,
-            "broken": report.broken,
-            "misplaced": report.misplaced,
-            "other": report.other,
-            "comment": report.comment
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Report added with id: \(report.id)")
+        
+        concurrentUploadReportQueue.async { [weak self] in
+            guard let self = self else {
+                  return
+            }
+                        
+            print("Starts uploading report with id: \(report.id)")
+            self.db.collection("reports").document(report.id).setData([
+                "id": report.id,
+                "user": report.user,
+                "photoFilename" : report.photoFilename,
+                "timestamp": Firebase.Date(timeIntervalSince1970: report.timestamp?.timeIntervalSince1970 ?? Date().timeIntervalSince1970),
+                "geolocation": Firebase.GeoPoint(latitude: report.latitude ?? 0.0, longitude: report.longitude ?? 0.0),
+                "address": report.getAddressAsString(),
+                "qrCode": report.getQRcodeAsString(),
+                "brand": report.getBrandAsString(),
+                "laying": report.laying,
+                "broken": report.broken,
+                "misplaced": report.misplaced,
+                "other": report.other,
+                "comment": report.comment
+            ]) { err in
+                if let err = err {
+                    print("Error uploading document: \(err)")
+                } else {
+                    print("Report uploaded with id: \(report.id)")
+                }
             }
         }
         
         //Upload report photo
-        self.uploadPhoto(image: report.photo!, name: report.photoFilename)
+        concurrentUploadReportPhotoQueue.async { [weak self] in
+            guard let self = self else {
+                  return
+            }
+            
+            print("Starts uploading report photo with id: \(report.id)")
+            self.uploadPhoto(image: report.photo!, name: report.photoFilename)
+            print("Finished uploading report photo with id: \(report.id)")
+        }
     }
     
     private func uploadPhoto(image: UIImage, name: String) {

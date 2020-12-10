@@ -45,13 +45,13 @@ struct ReportPreview: View {
             
             Section (header: Text("Type of violation")) {
                 if report.misplaced {
-                    ViolationLabel(text: "Misplaced")
+                    ViolationLabel(text: "Was misplaced")
                 }
                 if report.laying {
-                    ViolationLabel(text: "Is Laying")
+                    ViolationLabel(text: "Was laying")
                 }
                 if report.broken {
-                    ViolationLabel(text: "Is Broken")
+                    ViolationLabel(text: "Was broken")
                 }
                 if report.other {
                     ViolationLabel(text: "Other")

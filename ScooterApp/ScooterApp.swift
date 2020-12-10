@@ -1,10 +1,3 @@
-//
-//  ScooterAppApp.swift
-//  ScooterApp
-//
-//  Created by Gabriel Brodersen on 14/11/2020.
-//
-
 import SwiftUI
 import Firebase
 
