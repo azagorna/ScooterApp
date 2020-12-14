@@ -20,8 +20,8 @@ enum ReportErrors: Error {
 class Report: NSObject, ObservableObject, Identifiable, MKAnnotation {
     
     //MKAnnotation required properties:
-    var title: String? {getDayAsString() ?? "No day title"}
-    var subtitle: String? {"Time: \(getTimeAsString() ?? "No time title")"}
+    var title: String? {getBrandAsString()}
+    var subtitle: String? {getDayAsString() ?? "N/A"} //{"Time: \(getTimeAsString() ?? "No time title")"}
     var coordinate: CLLocationCoordinate2D {CLLocationCoordinate2D(latitude: latitude ?? 0.0, longitude: longitude ?? 0.0)}
     
     private let locationManager = LocationManager.singleton
@@ -30,6 +30,7 @@ class Report: NSObject, ObservableObject, Identifiable, MKAnnotation {
     var photoFilename: String { get {self.id + ".jpg"} }
     var user: String = "Default" //Not used for now
     @Published var photo: UIImage?
+    @Published var mapPinPhoto: UIImage? = nil
     @Published var photoDownloadProgress = 0.0
     @Published var timestamp: Date? //Set when taking photo
     @Published var longitude: Double?
@@ -217,6 +218,8 @@ class Report: NSObject, ObservableObject, Identifiable, MKAnnotation {
                     self.brand = .wind
                 } else if (url.contains("circ")) {
                     self.brand = .circ
+                } else if (url.contains("voi")) || url.count == 4 { // Voi sometimes uses 4 character codes
+                    self.brand = .voi
                 } else if (url.isEmpty){
                     self.brand = .none
                 } else {
@@ -286,6 +289,7 @@ enum ScooterBrand: String {
     case unknown = "Unknown scooter brand"
     case lime = "Lime"
     case tier = "Tier"
+    case voi = "Voi"
     case bird = "Bird"
     case wind = "Wind"
     case circ = "Circ"

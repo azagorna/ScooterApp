@@ -32,7 +32,7 @@ struct MapView: UIViewRepresentable {
         
         //print("REPORTS:", reportStore.reportsList.debugDescription)
         view.addAnnotations(reportAnnotations)
-        //print("DEBUG:", view.annotations.debugDescription)
+        //print("DEBUG:", view.annotations)
         
         
         if reportAnnotations.count + 1 != view.annotations.count {

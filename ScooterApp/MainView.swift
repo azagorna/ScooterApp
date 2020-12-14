@@ -9,7 +9,7 @@ struct MainView: View {
     @ObservedObject var reportStore = ReportStore.singleton
     
     //@ObservedObject private var locations: [MKPointAnnotation] = ReportStore.reportsList as [MKPointAnnotation]
-    
+    @Environment(\.presentationMode) var presentationMode
     @State private var selectedPlace: MKPointAnnotation?
     @State private var selectedReport: Report? = nil
     @State private var showReport: Bool = false
@@ -46,21 +46,14 @@ struct MainView: View {
                 }.padding()
             }.onAppear(perform: ReportStore.singleton.updateDateFromFirebase)
         }).sheet(isPresented: $showReport) {
-            VStack(alignment: .center, spacing: 10) {
+            NavigationView {
                 ReportPreview(report: selectedReport!)
-            }.navigationBarTitle("Bar Title", displayMode: .inline).navigationBarItems(trailing: Button("Done",
-                                                                                                        action: {}))
+                    .navigationBarTitle(selectedReport?.getDayAsString() ?? "Report", displayMode: .inline)
+                    .navigationBarItems(trailing: Button("Close", action: {
+                        self.showReport = false
+                    }))
+            }
         }
-        //                .toolbar {
-        //                    ToolbarItem(placement: .primaryAction) {
-        //                        Button(action: {
-        //                            self.showReport = false
-        //                        }) {
-        //                            Text("Back").fontWeight(.semibold)
-        //                        }
-        //                    }
-        //                }
-        //        }
     }
 }
 
