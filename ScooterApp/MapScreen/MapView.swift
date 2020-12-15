@@ -1,4 +1,3 @@
-// Source: https://www.iosapptemplates.com/blog/swiftui/map-view-swiftui
 // Inspired by: Paul Hudson tutorial, source: https://www.youtube.com/watch?v=fcGiX57a1ww
 
 import MapKit
@@ -48,11 +47,6 @@ struct MapView: UIViewRepresentable {
                 return
             }
         }
-        
-//        DispatchQueue.main.async {
-//            view.removeAnnotations(reportStore.reportsList as [MKAnnotation])
-//            view.addAnnotations(reportStore.reportsList as [MKAnnotation])
-//        }
     }
 
     func makeCoordinator() -> Coordinator {
@@ -154,9 +148,6 @@ struct MapView: UIViewRepresentable {
                     
                     annotationView?.image =  finalMarkerImage
                     annotationView?.canShowCallout = false
-                    //annotationView?.calloutOffset = .init(x: 0, y: 20)
-                    //annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-                    
                 }
             } else {
                 annotationView?.annotation = annotation

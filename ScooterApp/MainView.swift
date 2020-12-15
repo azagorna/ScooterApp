@@ -8,8 +8,8 @@ struct MainView: View {
     @ObservedObject var locationManager = LocationManager.singleton
     @ObservedObject var reportStore = ReportStore.singleton
     
-    //@ObservedObject private var locations: [MKPointAnnotation] = ReportStore.reportsList as [MKPointAnnotation]
     @Environment(\.presentationMode) var presentationMode
+    
     @State private var selectedPlace: MKPointAnnotation?
     @State private var selectedReport: Report? = nil
     @State private var showReport: Bool = false

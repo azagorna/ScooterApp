@@ -1,5 +1,3 @@
-
-
 import Firebase
 import Foundation
 import UIKit
@@ -9,9 +7,6 @@ class ReportStore: ObservableObject{
     static let singleton = ReportStore()
     @Published var reports = [String:Report]()
     @Published var reportsList = [Report]()
-    
-    //var photos = [String:UIImage]()
-    let placeholder: UIImage = UIImage(named: "placeholder_missing_scooter")!
     
     //Firebase Stuff
     let DEBUG_DISABLE_SUBMITTING = false

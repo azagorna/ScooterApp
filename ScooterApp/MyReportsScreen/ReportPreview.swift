@@ -1,13 +1,7 @@
-//
-//  ReportView.swift
-//  ScooterApp
-//
-//  Created by Gabriel Brodersen on 15/11/2020.
-//
-
 import SwiftUI
 
 struct ReportPreview: View {
+    
     @ObservedObject var report: Report
     @Environment(\.presentationMode) var presentationMode
     @State private var showActionSheet = false
@@ -77,15 +71,6 @@ struct ReportPreview: View {
                                 }])
                 }
             }
-            // DEBUGGING
-            //            Section(header: Text("DEBUGGING")) {
-            //                Text("Date: \(report.timestamp?.description ?? "No date set yet")")
-            //                Text("Latitude: \(report.latitude ?? 0.0)")
-            //                Text("Longitude: \(report.longitude ?? 0.0)")
-            //                Text("Address: \(report.getAddressAsString())")
-            //                Text("QR code: \(report.getQRcodeAsString())")
-            //                Text("Brand: \(report.getBrandAsString())")
-            //            }.foregroundColor(.green)
         }
     }
 }

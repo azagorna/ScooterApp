@@ -1,15 +1,7 @@
-
 import Foundation
 import SwiftUI
 import MapKit
 import CoreLocation
-
-//- `Hashable`
-//    -
-//- `Codable` (type alias for `encodable` and `decodable` combined)
-//    - Useful for defining how a class, struct or enum should be translatable to/from other database structures such as JSON.
-//- `Identifiable`
-//    - Useful for uniquely identifying individual elements for a list (sometimes use KeyPaths like `\.id`)
 
 enum ReportErrors: Error {
     case cantFindLocation(String)

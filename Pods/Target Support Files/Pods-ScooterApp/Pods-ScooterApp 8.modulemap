@@ -1,6 +1,0 @@
-framework module Pods_ScooterApp {
-  umbrella header "Pods-ScooterApp-umbrella.h"
-
-  export *
-  module * { export * }
-}
