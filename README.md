@@ -1,4 +1,7 @@
-# Research Project at IT University of Copenhagen, by:
+# Research Project at IT University of Copenhagen, August 2020
+
+**Project by:**
+
 - Agnieszka Helena Zagórna
 - Gabriel Frederik Brodersen
 
