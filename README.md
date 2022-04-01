@@ -1,4 +1,4 @@
-# Research Project at IT University of Copenhagen, August 2020
+# Research Project at IT University of Copenhagen, Autumn 2020
 
 **Project by:**
 
